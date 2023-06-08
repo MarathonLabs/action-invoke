@@ -1,0 +1,25 @@
+name: Invoke marathon-cloud cli
+description: Invoke marathon-cloud CLI in GitHub Actions
+inputs:
+  apiKey:
+    description: "API key for authenticating with Marathon Cloud"
+    required: true
+  application:
+    description: "Application binary path, e.g. apk file for Android"
+    required: true
+  testApplication:
+    description: "Test application binary path, e.g. apk file for Android"
+    required: true
+  link:
+    description: "Link to commit"
+    required: false
+  output:
+    description: "Output folder"
+    required: false
+    default: "marathon"
+branding:
+  icon: "play"
+  color: "purple"
+runs:
+  using: "node16"
+  main: "lib/index.js"
