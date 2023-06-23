@@ -5,11 +5,14 @@ inputs:
     description: "API key for authenticating with Marathon Cloud"
     required: true
   application:
-    description: "Application binary path, e.g. apk file for Android"
+    description: "Application binary path, e.g. apk file for Android or zip file of iOS Application"
     required: true
   testApplication:
-    description: "Test application binary path, e.g. apk file for Android"
+    description: "Test application binary path, e.g. apk file for Android or zip file of iOS Test Runner app"
     required: true
+  platform:
+    description: "Testing platform. Android or iOS only"
+    required: true  
   link:
     description: "Link to commit"
     required: false

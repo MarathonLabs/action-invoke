@@ -6,16 +6,19 @@ async function main() {
     const apiKey = core.getInput("apiKey");
     const application = core.getInput("application");
     const testApplication = core.getInput("testApplication");
+    const platform = core.getInput("platform")
     const link = core.getInput("link");
     const output = core.getInput("output");
 
     const args = [
       "-api-key",
       apiKey,
-      "-apk",
+      "-app",
       application,
-      "-testapk",
+      "-testapp",
       testApplication,
+      "-platform",
+      platform
     ];
 
     if (output) {
