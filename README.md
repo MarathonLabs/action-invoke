@@ -7,8 +7,11 @@ This action wraps [marathon-cloud][] CLI in your GitHub Actions workflow.
 |             Name             | Description                                             | Default | Example                                          |
 | :--------------------------: | ------------------------------------------------------- | ------- | ------------------------------------------------ |
 |     `apiKey` (required)      | Marathon Cloud API key                                  | ``      | `cafebabe`                                       |
-|   `application` (required)   | Application binary path, e.g. apk file for Android      | ``      | `app/build/output/apk/app-debug.apk`             |
-| `testApplication` (required) | Test application binary path, e.g. apk file for Android | ``      | `app/build/output/apk/app-androidTest-debug.apk` |
+|   `application` (required)   | Application binary setup-marathon-cloud                 | ``      | `/home/user/workspace/sample.apk` or             |
+|                              |                                                         | ``      | `/home/user/workspace/sample.zip`                |
+| `testApplication` (required) | Test application binary setup-marathon-cloud            | ``      | `/home/user/workspace/testSample.apk` or         |
+|                              |                                                         | ``      | `/home/user/workspace/sampleUITests-Runner.zip`  |
+|    `platform` (required)     | Testing platform                                        | ``      | `Android` or `iOS`                               |
 |     `output` (optional)      | Output folder path                                      | ``      | ``                                               |
 |      `link` (optional)       | Link to commit                                          | ``      | ``                                               |
 
@@ -16,13 +19,28 @@ This action wraps [marathon-cloud][] CLI in your GitHub Actions workflow.
 
 ### Basic
 
+#### Android
+
 ```yaml
 - name: run tests using marathon-cloud
   uses: MarathonLabs/action-invoke@1.0.0
   with:
     apiKey: "cafebabe"
-    application: "app/build/output/apk/app-debug.apk"
-    testApplication: "app/build/output/apk/app-androidTest-debug.apk"
+    application: "/home/user/workspace/sample.apk"
+    testApplication: "/home/user/workspace/testSample.apk"
+    platform: "Android"
+```
+
+#### iOS
+
+```yaml
+- name: run tests using marathon-cloud
+  uses: MarathonLabs/action-invoke@1.0.0
+  with:
+    apiKey: "cafebabe"
+    application: "/home/user/workspace/sample.zip"
+    testApplication: "/home/user/workspace/sampleUITests-Runner.zip"
+    platform: "iOS"
 ```
 
 ### Developing
