@@ -7,10 +7,8 @@ This action wraps [marathon-cloud][] CLI in your GitHub Actions workflow.
 |             Name             | Description                                             | Default | Example                                          |
 | :--------------------------: | ------------------------------------------------------- | ------- | ------------------------------------------------ |
 |     `apiKey` (required)      | Marathon Cloud API key                                  | ``      | `cafebabe`                                       |
-|   `application` (required)   | Application binary setup-marathon-cloud                 | ``      | `/home/user/workspace/sample.apk` or             |
-|                              |                                                         |         | `/home/user/workspace/sample.zip`                |
-| `testApplication` (required) | Test application binary setup-marathon-cloud            | ``      | `/home/user/workspace/testSample.apk` or         |
-|                              |                                                         |         | `/home/user/workspace/sampleUITests-Runner.zip`  |
+|   `application` (required)   | Application binary setup-marathon-cloud                 | ``      | `/home/user/workspace/sample.apk` or `/home/user/workspace/sample.zip` |
+| `testApplication` (required) | Test application binary setup-marathon-cloud            | ``      | `/home/user/workspace/testSample.apk` or `/home/user/workspace/sampleUITests-Runner.zip` |
 |    `platform` (required)     | Testing platform                                        | ``      | `Android` or `iOS`                               |
 |     `output` (optional)      | Output folder path                                      | ``      | ``                                               |
 |      `link` (optional)       | Link to commit                                          | ``      | ``                                               |
