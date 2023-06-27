@@ -7,9 +7,9 @@ This action wraps [marathon-cloud][] CLI in your GitHub Actions workflow.
 |             Name             | Description                                             | Default | Example                                          |
 | :--------------------------: | ------------------------------------------------------- | ------- | ------------------------------------------------ |
 |     `apiKey` (required)      | Marathon Cloud API key                                  | ``      | `cafebabe`                                       |
-|   `application` (required)   | Application binary                                      | ``      | `/home/user/workspace/sample.apk` or `/home/user/workspace/sample.zip` |
-| `testApplication` (required) | Test application binary                                 | ``      | `/home/user/workspace/testSample.apk` or `/home/user/workspace/sampleUITests-Runner.zip` |
-|    `platform` (required)     | Testing platform                                        | ``      | `Android` or `iOS`                               |
+|   `application` (required)   | Application binary path. <br>**Android**: `application` should point to the APK file. <br>**iOS**: `application` should point to an ARM compatible Simulator build packaged in an ipa format or a zip archive.                                 |         | **Android**: `app/build/outputs/apk/debug/app-debug.apk` <br>**iOS**: `/home/user/workspace/sample.zip` or `/home/user/workspace/sample.ipa` |
+| `testApplication` (required) | Test application binary path. <br>**Android**: `test_application` should point to the test .apk file for your app. <br>**iOS**: `test_application` should point to an ARM compatible iOS Test Runner app packaged in an ipa format or a zip archive.                            |         | **Android**: `app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk` <br>**iOS**: `/home/user/workspace/sampleUITests-Runner.zip` or `/home/user/workspace/sampleUITests-Runner.ipa` |
+|    `platform` (required)     | Testing platform                                        |         | `Android` or `iOS` 
 |     `output` (optional)      | Output folder path                                      | ``      | ``                                               |
 |      `link` (optional)       | Link to commit                                          | ``      | ``                                               |
 
