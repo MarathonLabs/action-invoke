@@ -12,7 +12,10 @@ inputs:
     required: true
   platform:
     description: "Testing platform. Android or iOS only"
-    required: true  
+    required: true
+  osVersion:
+    description: "Android or iOS OS version"
+    required: false
   link:
     description: "Link to commit"
     required: false
