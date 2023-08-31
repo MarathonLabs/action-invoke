@@ -6,9 +6,10 @@ async function main() {
     const apiKey = core.getInput("apiKey");
     const application = core.getInput("application");
     const testApplication = core.getInput("testApplication");
-    const platform = core.getInput("platform")
+    const platform = core.getInput("platform");
     const link = core.getInput("link");
     const output = core.getInput("output");
+    const osVersion = core.getInput("osVersion");
 
     const args = [
       "-api-key",
@@ -18,7 +19,7 @@ async function main() {
       "-testapp",
       testApplication,
       "-platform",
-      platform
+      platform,
     ];
 
     if (output) {
@@ -27,6 +28,10 @@ async function main() {
 
     if (link) {
       args.push("-link", link);
+    }
+
+    if (osVersion) {
+      args.push("-os-version", osVersion);
     }
 
     await exec("marathon-cloud", args);

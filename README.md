@@ -4,14 +4,15 @@ This action wraps [marathon-cloud][] CLI in your GitHub Actions workflow.
 
 ## Action Inputs
 
-|             Name             | Description                                             | Default | Example                                          |
-| :--------------------------: | ------------------------------------------------------- | ------- | ------------------------------------------------ |
-|     `apiKey` (required)      | Marathon Cloud API key                                  | ``      | `cafebabe`                                       |
-|   `application` (required)   | Application binary                                      | ``      | `/home/user/workspace/sample.apk` or `/home/user/workspace/sample.zip` |
-| `testApplication` (required) | Test application binary                                 | ``      | `/home/user/workspace/testSample.apk` or `/home/user/workspace/sampleUITests-Runner.zip` |
-|    `platform` (required)     | Testing platform                                        | ``      | `Android` or `iOS`                               |
-|     `output` (optional)      | Output folder path                                      | ``      | ``                                               |
-|      `link` (optional)       | Link to commit                                          | ``      | ``                                               |
+|             Name             | Description               | Default | Example                                                                                  |
+| :--------------------------: | ------------------------- |---------| ---------------------------------------------------------------------------------------- |
+|     `apiKey` (required)      | Marathon Cloud API key    | ``      | `cafebabe`                                                                               |
+|   `application` (required)   | Application binary        | ``      | `/home/user/workspace/sample.apk` or `/home/user/workspace/sample.zip`                   |
+| `testApplication` (required) | Test application binary   | ``      | `/home/user/workspace/testSample.apk` or `/home/user/workspace/sampleUITests-Runner.zip` |
+|    `platform` (required)     | Testing platform          | ``      | `Android` or `iOS`                                                                       |
+|    `osVersion` (optional)    | Android or iOS OS version | ``      | `11` or `15.5`                                                                           |
+|     `output` (optional)      | Output folder path        | ``      | ``                                                                                       |
+|      `link` (optional)       | Link to commit            | ``      | ``                                                                                       |
 
 ## Usage Examples
 
