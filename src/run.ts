@@ -10,6 +10,7 @@ async function main() {
     const link = core.getInput("link");
     const output = core.getInput("output");
     const osVersion = core.getInput("osVersion");
+    const systemImage = core.getInput("systemImage");
 
     const args = [
       "-api-key",
@@ -32,6 +33,10 @@ async function main() {
 
     if (osVersion) {
       args.push("-os-version", osVersion);
+    }
+
+    if (systemImage) {
+      args.push("-system-image", systemImage);
     }
 
     await exec("marathon-cloud", args);
