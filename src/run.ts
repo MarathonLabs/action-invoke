@@ -11,6 +11,7 @@ async function main() {
     const output = core.getInput("output");
     const osVersion = core.getInput("osVersion");
     const systemImage = core.getInput("systemImage");
+    const isolated = core.getInput("isolated");
 
     const args = [
       "-api-key",
@@ -37,6 +38,10 @@ async function main() {
 
     if (systemImage) {
       args.push("-system-image", systemImage);
+    }
+
+    if (isolated) {
+      args.push("-isolated", systemImage);
     }
 
     await exec("marathon-cloud", args);

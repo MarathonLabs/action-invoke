@@ -26,6 +26,9 @@ inputs:
     description: "Output folder"
     required: false
     default: "marathon"
+  isolated:
+    description: "Run each test in isolation, i.e. isolated batching"
+    required: false
 branding:
   icon: "play"
   color: "purple"

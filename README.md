@@ -14,6 +14,7 @@ This action wraps [marathon-cloud][] CLI in your GitHub Actions workflow.
 |   `systemImage` (optional)   | OS-specific system image  | ``      | `default`, `google_apis`, etc.                                                                                                                                                                               |
 |     `output` (optional)      | Output folder path        | ``      | ``                                                                                                                                                                                               |
 |      `link` (optional)       | Link to commit            | ``      | ``                                                                                                                                                                                               |
+|    `isolated` (optional)     | Run each test in isolation, i.e. isolated batching            | ``      | ``                                                                                                                                                           |
 
 ## Usage Examples
 
