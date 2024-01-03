@@ -12,6 +12,8 @@ async function main() {
     const osVersion = core.getInput("osVersion");
     const systemImage = core.getInput("systemImage");
     const isolated = core.getInput("isolated");
+    const flavor = core.getInput("flavor");
+    const filterFile = core.getInput("filterFile");
 
     const args = [
       "-api-key",
@@ -41,7 +43,15 @@ async function main() {
     }
 
     if (isolated) {
-      args.push("-isolated", systemImage);
+      args.push("-isolated", isolated);
+    }
+
+    if (flavor) {
+      args.push("-flavor", flavor);
+    }
+
+    if (filterFile) {
+      args.push("-filter-file", filterFile);
     }
 
     await exec("marathon-cloud", args);

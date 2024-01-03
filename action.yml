@@ -29,6 +29,12 @@ inputs:
   isolated:
     description: "Run each test in isolation, i.e. isolated batching"
     required: false
+  flavor:
+    description: "Type of tests to run. Default: [native]. Possible values: [native, js-test-appium, python-robotframework-appium]"
+    required: false
+  filterFile:
+    description: "File containing test filters in YAML format, following the schema described at https://docs.marathonlabs.io/runner/configuration/filtering/#filtering-logic. For iOS see also https://docs.marathonlabs.io/runner/next/ios#test-plans."
+    required: false
 branding:
   icon: "play"
   color: "purple"
