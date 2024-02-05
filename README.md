@@ -26,7 +26,7 @@ This action wraps [marathon-cloud][] CLI in your GitHub Actions workflow.
 
 ```yaml
 - name: run tests using marathon-cloud
-  uses: MarathonLabs/action-invoke@1.0.0
+  uses: MarathonLabs/action-invoke@0
   with:
     apiKey: "cafebabe"
     application: "/home/user/workspace/sample.apk"
@@ -38,7 +38,7 @@ This action wraps [marathon-cloud][] CLI in your GitHub Actions workflow.
 
 ```yaml
 - name: run tests using marathon-cloud
-  uses: MarathonLabs/action-invoke@1.0.0
+  uses: MarathonLabs/action-invoke@0
   with:
     apiKey: "cafebabe"
     application: "/home/user/workspace/sample.zip"
