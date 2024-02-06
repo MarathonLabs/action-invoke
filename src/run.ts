@@ -1,5 +1,6 @@
 import * as core from "@actions/core";
 import { exec } from "@actions/exec";
+import { buildAndroidArgs, buildiOSArgs } from "./command";
 
 async function main() {
   try {
@@ -14,46 +15,46 @@ async function main() {
     const isolated = core.getInput("isolated");
     const flavor = core.getInput("flavor");
     const filterFile = core.getInput("filterFile");
+    const wait = core.getInput("wait");
 
-    const args = [
-      "-api-key",
-      apiKey,
-      "-app",
-      application,
-      "-testapp",
-      testApplication,
-      "-platform",
-      platform,
-    ];
-
-    if (output) {
-      args.push("-o", output);
+    let args: string[] = [];
+    switch (platform) {
+      case "android": {
+        args = buildAndroidArgs(
+          apiKey,
+          application,
+          testApplication,
+          link,
+          output,
+          osVersion,
+          systemImage,
+          isolated,
+          flavor,
+          filterFile,
+          wait,
+        );
+      }
+      case "ios": {
+        args = buildiOSArgs(
+          apiKey,
+          application,
+          testApplication,
+          link,
+          output,
+          osVersion,
+          systemImage,
+          isolated,
+          flavor,
+          filterFile,
+          wait,
+        );
+      }
+      default: {
+        core.setFailed(
+          `Unsupported platform ${platform}. Please use one of [android, ios]`,
+        );
+      }
     }
-
-    if (link) {
-      args.push("-link", link);
-    }
-
-    if (osVersion) {
-      args.push("-os-version", osVersion);
-    }
-
-    if (systemImage) {
-      args.push("-system-image", systemImage);
-    }
-
-    if (isolated) {
-      args.push("-isolated", isolated);
-    }
-
-    if (flavor) {
-      args.push("-flavor", flavor);
-    }
-
-    if (filterFile) {
-      args.push("-filter-file", filterFile);
-    }
-
     await exec("marathon-cloud", args);
   } catch (e: any) {
     core.warning(`marathon-cloud invoke failed: ${e}`);
