@@ -17,6 +17,10 @@ This action wraps [marathon-cloud][] CLI in your GitHub Actions workflow.
 |    `isolated` (optional)     | Run each test in isolation, i.e. isolated batching                                                                                                                                                                                                   | ``      | ``                                                                                                                                                                                               |
 |     `flavor` (optional)      | Type of tests to run                                                                                                                                                                                                                                 | ``      | `native`, `js-test-appium`, `python-robotframework-appium`                                                                                                                                       |
 |   `filterFile` (optional)    | File containing test filters in YAML format, following the schema described at https://docs.marathonlabs.io/runner/configuration/filtering/#filtering-logic. For iOS see also https://docs.marathonlabs.io/runner/next/ios#test-plans.               | ``      | ``                                                                                                                                                                                               |
+|   `wait` (optional)          | Wait for test run to finish if true, exits after triggering a run if false.                                                                                                                                                                          | ``      | `false`                                                                                                                                                                                          |
+  wait:
+    description: ""
+    required: false
 
 ## Usage Examples
 
