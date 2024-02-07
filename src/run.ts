@@ -35,6 +35,7 @@ async function main() {
           filterFile,
           wait,
         );
+        break;
       }
       case "ios": {
         args = buildiOSArgs(
@@ -50,11 +51,13 @@ async function main() {
           filterFile,
           wait,
         );
+        break;
       }
       default: {
         core.setFailed(
           `Unsupported platform ${platform}. Please use one of [android, ios]`,
         );
+        break;
       }
     }
     await exec("marathon-cloud", args);
