@@ -18,7 +18,9 @@ async function main() {
     const wait = core.getInput("wait");
 
     let args: string[] = [];
-    switch (platform) {
+
+    const lowercasePlatform = platform.toLowerCase();
+    switch (lowercasePlatform) {
       case "android": {
         args = buildAndroidArgs(
           apiKey,
