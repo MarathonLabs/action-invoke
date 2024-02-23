@@ -16,6 +16,8 @@ async function main() {
     const flavor = core.getInput("flavor");
     const filterFile = core.getInput("filterFile");
     const wait = core.getInput("wait");
+    const name = core.getInput("name");
+    const device = core.getInput("device");
 
     let args: string[] = [];
 
@@ -34,6 +36,8 @@ async function main() {
           flavor,
           filterFile,
           wait,
+          name,
+          device,
         );
         break;
       }
@@ -50,6 +54,7 @@ async function main() {
           flavor,
           filterFile,
           wait,
+          name,
         );
         break;
       }

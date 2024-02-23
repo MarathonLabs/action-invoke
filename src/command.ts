@@ -12,6 +12,8 @@ export function buildAndroidArgs(
   flavor: string,
   filterFile: string,
   wait: string,
+  name: string,
+  device: string,
 ): string[] {
   const args = [
     "run",
@@ -56,6 +58,14 @@ export function buildAndroidArgs(
     args.push("--wait", wait);
   }
 
+  if (name) {
+    args.push("--name", name);
+  }
+
+  if (device) {
+    args.push("--device", device);
+  }
+
   return args;
 }
 
@@ -71,6 +81,7 @@ export function buildiOSArgs(
   flavor: string,
   filterFile: string,
   wait: string,
+  name: string,
 ): string[] {
   const args = [
     "run",
@@ -119,6 +130,10 @@ export function buildiOSArgs(
 
   if (wait) {
     args.push("--wait", wait);
+  }
+
+  if (name) {
+    args.push("--name", name);
   }
 
   return args;
