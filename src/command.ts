@@ -14,6 +14,7 @@ export function buildAndroidArgs(
   wait: string,
   name: string,
   device: string,
+  xcodeVersion: string,
 ): string[] {
   const args = [
     "run",
@@ -66,6 +67,10 @@ export function buildAndroidArgs(
     args.push("--device", device);
   }
 
+  if (xcodeVersion) {
+    core.warning(`xcodeVersion argument is only for iOS`);
+  }
+
   return args;
 }
 
@@ -82,6 +87,8 @@ export function buildiOSArgs(
   filterFile: string,
   wait: string,
   name: string,
+  device: string,
+  xcodeVersion: string,
 ): string[] {
   const args = [
     "run",
@@ -103,9 +110,7 @@ export function buildiOSArgs(
   }
 
   if (osVersion) {
-    core.warning(
-      `Current version of action-invoke does not yet support os version selection for iOS. Using default`,
-    );
+    args.push("--os-version", osVersion);
   }
 
   if (systemImage) {
@@ -134,6 +139,14 @@ export function buildiOSArgs(
 
   if (name) {
     args.push("--name", name);
+  }
+
+  if (device) {
+    args.push("--device", device);
+  }
+
+  if (xcodeVersion) {
+    args.push("--xcode-version", xcodeVersion);
   }
 
   return args;
