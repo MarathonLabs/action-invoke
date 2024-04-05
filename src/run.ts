@@ -18,6 +18,7 @@ async function main() {
     const wait = core.getInput("wait");
     const name = core.getInput("name");
     const device = core.getInput("device");
+    const xcodeVersion = core.getInput("xcodeVersion");
 
     let args: string[] = [];
 
@@ -38,6 +39,7 @@ async function main() {
           wait,
           name,
           device,
+          xcodeVersion,
         );
         break;
       }
@@ -55,6 +57,8 @@ async function main() {
           filterFile,
           wait,
           name,
+          device,
+          xcodeVersion,
         );
         break;
       }
