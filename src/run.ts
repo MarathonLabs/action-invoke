@@ -19,6 +19,8 @@ async function main() {
     const name = core.getInput("name");
     const device = core.getInput("device");
     const xcodeVersion = core.getInput("xcodeVersion");
+    const xctestplanFilterFile = core.getInput("xctestplanFilterFile");
+    const xctestplanTargetName = core.getInput("xctestplanTargetName");
 
     let args: string[] = [];
 
@@ -40,6 +42,8 @@ async function main() {
           name,
           device,
           xcodeVersion,
+          xctestplanFilterFile,
+          xctestplanTargetName,
         );
         break;
       }
@@ -59,6 +63,8 @@ async function main() {
           name,
           device,
           xcodeVersion,
+          xctestplanFilterFile,
+          xctestplanTargetName,
         );
         break;
       }
