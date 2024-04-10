@@ -15,6 +15,8 @@ export function buildAndroidArgs(
   name: string,
   device: string,
   xcodeVersion: string,
+  xctestplanFilterFile: string,
+  xctestplanTargetName: string,
 ): string[] {
   const args = [
     "run",
@@ -71,6 +73,14 @@ export function buildAndroidArgs(
     core.warning(`xcodeVersion argument is only for iOS`);
   }
 
+  if (xctestplanFilterFile) {
+    core.warning(`xctestplanFilterFile argument is only for iOS`);
+  }
+
+  if (xctestplanTargetName) {
+    core.warning(`xctestplanTargetName argument is only for iOS`);
+  }
+
   return args;
 }
 
@@ -89,6 +99,8 @@ export function buildiOSArgs(
   name: string,
   device: string,
   xcodeVersion: string,
+  xctestplanFilterFile: string,
+  xctestplanTargetName: string,
 ): string[] {
   const args = [
     "run",
@@ -147,6 +159,14 @@ export function buildiOSArgs(
 
   if (xcodeVersion) {
     args.push("--xcode-version", xcodeVersion);
+  }
+
+  if (xctestplanFilterFile) {
+    args.push("--xctestplan-filter-file", xctestplanFilterFile);
+  }
+
+  if (xctestplanTargetName) {
+    args.push("--xctestplan-target-name", xctestplanTargetName);
   }
 
   return args;

@@ -47,6 +47,12 @@ inputs:
   xcodeVersion:
     description: "Xcode version. Only for iOS. Possible values: [14.3.1, 15.2]"
     required: false
+  xctestplanFilterFile:
+    description: "Test filters supplied as .xctestplan file"
+    required: false
+  xctestplanTargetName:
+    description: "Target name to use for test filtering in .xctestplan"
+    required: false
 branding:
   icon: "play"
   color: "purple"
