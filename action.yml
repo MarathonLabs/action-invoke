@@ -53,6 +53,12 @@ inputs:
   xctestplanTargetName:
     description: "Target name to use for test filtering in .xctestplan"
     required: false
+  xctestrunEnv:
+    description: "xctestrun environment variables, format: 'VAR1=VALUE1,VAR2=VALUE2'"
+    required: false
+  xctestrunTestEnv:
+    description: "xctestrun testing environment variables, format: 'VAR1=VALUE1,VAR2=VALUE2'"
+    required: false
 branding:
   icon: "play"
   color: "purple"

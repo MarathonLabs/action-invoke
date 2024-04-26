@@ -17,6 +17,8 @@ export function buildAndroidArgs(
   xcodeVersion: string,
   xctestplanFilterFile: string,
   xctestplanTargetName: string,
+  xctestrunEnv: string,
+  xctestrunTestEnv: string,
 ): string[] {
   const args = [
     "run",
@@ -81,6 +83,14 @@ export function buildAndroidArgs(
     core.warning(`xctestplanTargetName argument is only for iOS`);
   }
 
+  if (xctestrunEnv) {
+    core.warning(`xctestrunEnv argument is only for iOS`);
+  }
+
+  if (xctestrunTestEnv) {
+    core.warning(`xctestrunTestEnv argument is only for iOS`);
+  }
+
   return args;
 }
 
@@ -101,6 +111,8 @@ export function buildiOSArgs(
   xcodeVersion: string,
   xctestplanFilterFile: string,
   xctestplanTargetName: string,
+  xctestrunEnv: string,
+  xctestrunTestEnv: string,
 ): string[] {
   const args = [
     "run",
@@ -167,6 +179,18 @@ export function buildiOSArgs(
 
   if (xctestplanTargetName) {
     args.push("--xctestplan-target-name", xctestplanTargetName);
+  }
+
+  if (xctestrunEnv) {
+    xctestrunEnv.split(",").forEach((env) => {
+      args.push("--xctestrun-env", env.trim());
+    });
+  }
+
+  if (xctestrunTestEnv) {
+    xctestrunTestEnv.split(",").forEach((testEnv) => {
+      args.push("--xctestrun-test-env", testEnv.trim());
+    });
   }
 
   return args;
