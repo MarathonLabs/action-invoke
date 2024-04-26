@@ -21,6 +21,8 @@ async function main() {
     const xcodeVersion = core.getInput("xcodeVersion");
     const xctestplanFilterFile = core.getInput("xctestplanFilterFile");
     const xctestplanTargetName = core.getInput("xctestplanTargetName");
+    const xctestrunEnv = core.getInput("xctestrunEnv");
+    const xctestrunTestEnv = core.getInput("xctestrunTestEnv");
 
     let args: string[] = [];
 
@@ -44,6 +46,8 @@ async function main() {
           xcodeVersion,
           xctestplanFilterFile,
           xctestplanTargetName,
+          xctestrunEnv,
+          xctestrunTestEnv,
         );
         break;
       }
@@ -65,6 +69,8 @@ async function main() {
           xcodeVersion,
           xctestplanFilterFile,
           xctestplanTargetName,
+          xctestrunEnv,
+          xctestrunTestEnv,
         );
         break;
       }
