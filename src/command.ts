@@ -19,6 +19,7 @@ export function buildAndroidArgs(
   xctestplanTargetName: string,
   xctestrunEnv: string,
   xctestrunTestEnv: string,
+  ignoreTestFailures: string,
 ): string[] {
   const args = [
     "run",
@@ -71,6 +72,10 @@ export function buildAndroidArgs(
     args.push("--device", device);
   }
 
+  if (ignoreTestFailures) {
+    args.push("--ignore-test-failures", ignoreTestFailures);
+  }
+
   if (xcodeVersion) {
     core.warning(`xcodeVersion argument is only for iOS`);
   }
@@ -113,6 +118,7 @@ export function buildiOSArgs(
   xctestplanTargetName: string,
   xctestrunEnv: string,
   xctestrunTestEnv: string,
+  ignoreTestFailures: string,
 ): string[] {
   const args = [
     "run",
@@ -191,6 +197,10 @@ export function buildiOSArgs(
     xctestrunTestEnv.split(",").forEach((testEnv) => {
       args.push("--xctestrun-test-env", testEnv.trim());
     });
+  }
+
+  if (ignoreTestFailures) {
+    args.push("--ignore-test-failures", ignoreTestFailures);
   }
 
   return args;

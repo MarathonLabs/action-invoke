@@ -23,6 +23,7 @@ async function main() {
     const xctestplanTargetName = core.getInput("xctestplanTargetName");
     const xctestrunEnv = core.getInput("xctestrunEnv");
     const xctestrunTestEnv = core.getInput("xctestrunTestEnv");
+    const ignoreTestFailures = core.getInput("ignoreTestFailures");
 
     let args: string[] = [];
 
@@ -48,6 +49,7 @@ async function main() {
           xctestplanTargetName,
           xctestrunEnv,
           xctestrunTestEnv,
+          ignoreTestFailures,
         );
         break;
       }
@@ -71,6 +73,7 @@ async function main() {
           xctestplanTargetName,
           xctestrunEnv,
           xctestrunTestEnv,
+          ignoreTestFailures,
         );
         break;
       }
