@@ -5,7 +5,6 @@ export function buildAndroidArgs(
   application: string,
   testApplication: string,
   link: string,
-  output: string,
   osVersion: string,
   systemImage: string,
   isolated: string,
@@ -20,6 +19,7 @@ export function buildAndroidArgs(
   xctestrunEnv: string,
   xctestrunTestEnv: string,
   ignoreTestFailures: string,
+  resultFile: string,
 ): string[] {
   const args = [
     "run",
@@ -30,11 +30,9 @@ export function buildAndroidArgs(
     application,
     "--test-application",
     testApplication,
+    "--result-file",
+    resultFile,
   ];
-
-  if (output) {
-    args.push("--output", output);
-  }
 
   if (link) {
     args.push("--link", link);
@@ -104,7 +102,6 @@ export function buildiOSArgs(
   application: string,
   testApplication: string,
   link: string,
-  output: string,
   osVersion: string,
   systemImage: string,
   isolated: string,
@@ -119,6 +116,7 @@ export function buildiOSArgs(
   xctestrunEnv: string,
   xctestrunTestEnv: string,
   ignoreTestFailures: string,
+  resultFile: string,
 ): string[] {
   const args = [
     "run",
@@ -129,11 +127,9 @@ export function buildiOSArgs(
     application,
     "--test-application",
     testApplication,
+    "--result-file",
+    resultFile,
   ];
-
-  if (output) {
-    args.push("--output", output);
-  }
 
   if (link) {
     args.push("--link", link);
@@ -201,6 +197,29 @@ export function buildiOSArgs(
 
   if (ignoreTestFailures) {
     args.push("--ignore-test-failures", ignoreTestFailures);
+  }
+
+  return args;
+}
+
+export function buildDownloadArgs(
+  apiKey: string,
+  runId: string,
+  output: string,
+  outputGlob: string,
+): string[] {
+  const args = [
+    "download",
+    "--api-key",
+    apiKey,
+    "--id",
+    runId,
+    "--output",
+    output,
+  ];
+
+  if (outputGlob) {
+    args.push("--glob", outputGlob);
   }
 
   return args;
