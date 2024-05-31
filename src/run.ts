@@ -104,7 +104,7 @@ async function main() {
     }
 
     // Read and parse the result.json file
-    const resultJson = fs.readFileSync(output, "utf8");
+    const resultJson = fs.readFileSync(resultFile, "utf8");
     const result = JSON.parse(resultJson);
     const runId = result.id;
 
