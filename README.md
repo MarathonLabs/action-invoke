@@ -56,7 +56,7 @@ This action wraps [marathon-cloud][] CLI in your GitHub Actions workflow.
     platform: "ios"
 ```
 
-### Developing
+### Development
 
 The action source is located at [/src](/src). The action is written in TypeScript and compiled to a single javascript file with [`ncc`][ncc]. It's expected to checkin `lib/index.js` to the repository.
 
@@ -72,7 +72,7 @@ To build the action script, run the following command:
 $ npm run build
 ```
 
-To test the action, we can use the workflow [Test workflow](https://github.com/MarathonLabs/setup-marathon-cloud/actions/workflows/test-marathon-cloud.yaml) to trigger a build.
+To test the action, please use `manual_trigger.yaml` workflow.
 
 [ncc]: https://github.com/vercel/ncc
 [marathon-cloud]: https://github.com/MarathonLabs/marathon-cloud-cli
