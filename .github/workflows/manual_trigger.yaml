@@ -14,13 +14,18 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: "14"
+          node-version: "16"
 
       - name: Install dependencies
         run: npm install
 
       - name: Build TypeScript
         run: npm run build
+
+      - name: Setup Marathon Cloud
+        uses: MarathonLabs/setup-marathon-cloud@2.0.1
+        with:
+          version: "1.0.15"    
 
       - name: Run Marathon Cloud action-invoke
         uses: ./
@@ -32,3 +37,9 @@ jobs:
           name: "3_0"
           output: "output"
           outputGlob: "tests/**"
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: output
+          path: output
