@@ -35,7 +35,7 @@ jobs:
           testApplication: "example/appTest.apk"
           platform: "android"
           name: "3_0"
-          output: "output"
+          # output: "output"
           # outputGlob: "tests/**"
 
       - name: Upload artifact
