@@ -1,6 +1,7 @@
 import * as core from "@actions/core";
 import { exec } from "@actions/exec";
-import { buildAndroidArgs, buildiOSArgs } from "./command";
+import * as fs from "fs";
+import { buildAndroidArgs, buildiOSArgs, buildDownloadArgs } from "./command";
 
 async function main() {
   try {
@@ -10,6 +11,7 @@ async function main() {
     const platform = core.getInput("platform");
     const link = core.getInput("link");
     const output = core.getInput("output");
+    const outputGlob = core.getInput("outputGlob");
     const osVersion = core.getInput("osVersion");
     const systemImage = core.getInput("systemImage");
     const isolated = core.getInput("isolated");
@@ -24,6 +26,7 @@ async function main() {
     const xctestrunEnv = core.getInput("xctestrunEnv");
     const xctestrunTestEnv = core.getInput("xctestrunTestEnv");
     const ignoreTestFailures = core.getInput("ignoreTestFailures");
+    const resultFile = "result.json";
 
     let args: string[] = [];
 
@@ -35,7 +38,6 @@ async function main() {
           application,
           testApplication,
           link,
-          output,
           osVersion,
           systemImage,
           isolated,
@@ -50,6 +52,7 @@ async function main() {
           xctestrunEnv,
           xctestrunTestEnv,
           ignoreTestFailures,
+          resultFile,
         );
         break;
       }
@@ -59,7 +62,6 @@ async function main() {
           application,
           testApplication,
           link,
-          output,
           osVersion,
           systemImage,
           isolated,
@@ -74,6 +76,7 @@ async function main() {
           xctestrunEnv,
           xctestrunTestEnv,
           ignoreTestFailures,
+          resultFile,
         );
         break;
       }
@@ -84,7 +87,35 @@ async function main() {
         break;
       }
     }
+
+    core.info("marathon-cloud run command starts...");
     await exec("marathon-cloud", args);
+
+    // Check if output is empty and skip the remaining part if it is
+    if (!output) {
+      return;
+    }
+
+    if (!wait) {
+      core.warning(
+        "There is no way to download artifacts because wait=false. Please set wait=true to wait for the run to finish and allow artifact download.",
+      );
+      return;
+    }
+
+    // Read and parse the result.json file
+    const resultJson = fs.readFileSync(output, "utf8");
+    const result = JSON.parse(resultJson);
+    const runId = result.id;
+
+    let downloadArgs: string[] = buildDownloadArgs(
+      apiKey,
+      runId,
+      output,
+      outputGlob,
+    );
+    core.info("marathon-cloud download command starts...");
+    await exec("marathon-cloud", downloadArgs);
   } catch (e: any) {
     core.warning(`marathon-cloud invoke failed: ${e}`);
     core.setFailed(e);

@@ -23,9 +23,11 @@ inputs:
     description: "Link to commit"
     required: false
   output:
-    description: "Output folder"
+    description: "Output folder for test run results"
     required: false
-    default: "marathon"
+  outputGlob:
+    description: "Only files matching this glob will be downloaded, i.e. 'tests/**' will download only the JUnit xml files"
+    required: false
   isolated:
     description: "Run each test in isolation, i.e. isolated batching"
     required: false
