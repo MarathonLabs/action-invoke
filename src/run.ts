@@ -96,7 +96,7 @@ async function main() {
       return;
     }
 
-    if (!wait) {
+    if (wait && wait.toLowerCase() === "false") {
       core.warning(
         "There is no way to download artifacts because wait=false. Please set wait=true to wait for the run to finish and allow artifact download.",
       );
