@@ -36,7 +36,7 @@ jobs:
           platform: "android"
           name: "3_0"
           output: "output"
-          outputGlob: "tests/**"
+          # outputGlob: "tests/**"
 
       - name: Upload artifact
         uses: actions/upload-artifact@v2
