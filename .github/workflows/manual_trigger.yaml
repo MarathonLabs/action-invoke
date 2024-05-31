@@ -23,9 +23,9 @@ jobs:
         run: npm run build
 
       - name: Setup Marathon Cloud
-        uses: MarathonLabs/setup-marathon-cloud@2
+        uses: MarathonLabs/setup-marathon-cloud@2.0.1
         with:
-          version: "2.0.1"    
+          version: "1.0.15"    
 
       - name: Run Marathon Cloud action-invoke
         uses: ./
