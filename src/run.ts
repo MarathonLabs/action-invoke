@@ -27,6 +27,7 @@ async function main() {
     const xctestrunTestEnv = core.getInput("xctestrunTestEnv");
     const ignoreTestFailures = core.getInput("ignoreTestFailures");
     const resultFile = "result.json";
+    const pullFiles = core.getInput("pullFiles");
 
     let args: string[] = [];
 
@@ -53,6 +54,7 @@ async function main() {
           xctestrunTestEnv,
           ignoreTestFailures,
           resultFile,
+          pullFiles,
         );
         break;
       }
@@ -77,6 +79,7 @@ async function main() {
           xctestrunTestEnv,
           ignoreTestFailures,
           resultFile,
+          pullFiles,
         );
         break;
       }
