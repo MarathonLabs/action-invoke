@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
+  build_android:
     runs-on: ubuntu-latest
 
     steps:
@@ -25,7 +25,7 @@ jobs:
       - name: Setup Marathon Cloud
         uses: MarathonLabs/setup-marathon-cloud@2.0.1
         with:
-          version: "1.0.15"    
+          version: "1.0.27"    
 
       - name: Run Marathon Cloud action-invoke
         uses: ./
@@ -34,7 +34,47 @@ jobs:
           application: "example/app.apk"
           testApplication: "example/appTest.apk"
           platform: "android"
-          name: "3_0"
+          name: "android_3_0"
+          output: "output"
+          outputGlob: "tests/**"
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: output
+          path: output
+
+  build_ios:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: "16"
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build TypeScript
+        run: npm run build
+
+      - name: Setup Marathon Cloud
+        uses: MarathonLabs/setup-marathon-cloud@2.0.1
+        with:
+          version: "1.0.27"    
+
+      - name: Run Marathon Cloud action-invoke
+        uses: ./
+        with:
+          apiKey: ${{ secrets.RUN_TOKEN }}
+          application: "example/sample.zip"
+          testApplication: "example/sampleUITests-Runner.zip"
+          platform: "ios"
+          name: "ios_3_0"
           output: "output"
           outputGlob: "tests/**"
 
