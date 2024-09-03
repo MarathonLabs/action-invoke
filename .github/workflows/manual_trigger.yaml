@@ -35,8 +35,8 @@ jobs:
           testApplication: "example/appTest.apk"
           platform: "android"
           name: "android_3_0"
+          pullFiles: "APP_DATA:cache"
           output: "output"
-          outputGlob: "tests/**"
 
       - name: Upload artifact
         uses: actions/upload-artifact@v2
