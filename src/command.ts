@@ -20,6 +20,7 @@ export function buildAndroidArgs(
   xctestrunTestEnv: string,
   ignoreTestFailures: string,
   resultFile: string,
+  pullFiles: string,
 ): string[] {
   const args = [
     "run",
@@ -94,6 +95,11 @@ export function buildAndroidArgs(
     core.warning(`xctestrunTestEnv argument is only for iOS`);
   }
 
+  if (pullFiles) {
+    pullFiles.split(",").forEach((env) => {
+      args.push("--pull-files", env.trim());
+    });
+  }
   return args;
 }
 
@@ -117,6 +123,7 @@ export function buildiOSArgs(
   xctestrunTestEnv: string,
   ignoreTestFailures: string,
   resultFile: string,
+  pullFiles: string,
 ): string[] {
   const args = [
     "run",
@@ -197,6 +204,10 @@ export function buildiOSArgs(
 
   if (ignoreTestFailures) {
     args.push("--ignore-test-failures", ignoreTestFailures);
+  }
+
+  if (pullFiles) {
+    core.warning(`pullFiles argument is only for Android`);
   }
 
   return args;
