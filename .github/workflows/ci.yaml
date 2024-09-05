@@ -5,9 +5,8 @@ on:
   pull_request:
 
 jobs:
-  check_simple_android:
+  check_index_js:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -33,19 +32,39 @@ jobs:
       - name: Build TypeScript
         run: npm run build
 
-      - name: Compare lib/index.js with the original
+      - name: Compare and print diff of lib/index.js with the original
         run: |
           if [ -f "lib/index.original.js" ]; then
             if diff lib/index.js lib/index.original.js > /dev/null; then
               echo "No changes detected in lib/index.js."
             else
-              echo "Changes detected in lib/index.js."
+              echo "Changes detected in lib/index.js. Showing diff:"
+              diff lib/index.js lib/index.original.js
               exit 1  # Fail the job if differences are found
             fi
           else
             echo "Original lib/index.js backup not found, skipping comparison."
             exit 1  # Fail if the backup is somehow missing at this point
           fi
+
+  check_simple_android:
+    runs-on: ubuntu-latest
+    needs: check_index_js
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: "16"
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build TypeScript
+        run: npm run build
 
       - name: Setup Marathon Cloud
         uses: MarathonLabs/setup-marathon-cloud@2.0.1
@@ -63,6 +82,7 @@ jobs:
 
   check_output_android:
     runs-on: ubuntu-latest
+    needs: check_index_js
 
     steps:
       - name: Checkout repository
@@ -107,11 +127,12 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v2
         with:
-          name: ios_output
+          name: android_output
           path: output
 
   check_output_failed_android:
     runs-on: ubuntu-latest
+    needs: check_index_js
 
     steps:
       - name: Checkout repository
@@ -157,11 +178,12 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v2
         with:
-          name: ios_output
+          name: android_failed_output
           path: output
 
   check_ios:
     runs-on: ubuntu-latest
+    needs: check_index_js
 
     steps:
       - name: Checkout repository
