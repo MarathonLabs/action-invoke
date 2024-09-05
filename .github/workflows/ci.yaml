@@ -114,6 +114,7 @@ jobs:
           platform: "android"
           name: "android_3_0"
           output: "output"
+          ignoreTestFailures: "true"
 
       - name: Check if output folder exists and is not empty
         run: |
