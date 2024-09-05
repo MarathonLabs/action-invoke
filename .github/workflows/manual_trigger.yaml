@@ -25,7 +25,7 @@ jobs:
       - name: Setup Marathon Cloud
         uses: MarathonLabs/setup-marathon-cloud@2.0.1
         with:
-          version: "1.0.28"    
+          version: "1.0.30"
 
       - name: Run Marathon Cloud action-invoke
         uses: ./
@@ -65,7 +65,7 @@ jobs:
       - name: Setup Marathon Cloud
         uses: MarathonLabs/setup-marathon-cloud@2.0.1
         with:
-          version: "1.0.28"    
+          version: "1.0.30"
 
       - name: Run Marathon Cloud action-invoke
         uses: ./
