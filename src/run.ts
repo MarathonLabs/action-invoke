@@ -25,7 +25,8 @@ async function main() {
     const xctestplanTargetName = core.getInput("xctestplanTargetName");
     const xctestrunEnv = core.getInput("xctestrunEnv");
     const xctestrunTestEnv = core.getInput("xctestrunTestEnv");
-    const ignoreTestFailures = core.getInput("ignoreTestFailures").toLowerCase() === 'true';
+    const ignoreTestFailures =
+      core.getInput("ignoreTestFailures").toLowerCase() === "true";
     const resultFile = "result.json";
     const pullFiles = core.getInput("pullFiles");
 
@@ -99,14 +100,19 @@ async function main() {
       exitCode = await exec("marathon-cloud", args);
     } catch (error: any) {
       exitCode = error?.code ?? 1; // Default to 1 if there's no specific exit code
-      errorMessage = error.message || "Unknown error during marathon-cloud execution";
+      errorMessage =
+        error.message || "Unknown error during marathon-cloud execution";
     }
 
     if (exitCode !== 0) {
       if (!ignoreTestFailures) {
-        core.warning("Test failures detected, but continuing to download files...");
+        core.warning(
+          "Test failures detected, but continuing to download files...",
+        );
       } else {
-        core.warning("Test failures detected, but continuing as ignoreTestFailures is set to true.");
+        core.warning(
+          "Test failures detected, but continuing as ignoreTestFailures is set to true.",
+        );
       }
     }
 

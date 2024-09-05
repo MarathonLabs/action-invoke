@@ -59,7 +59,7 @@ This action wraps [marathon-cloud][] CLI in your GitHub Actions workflow.
 
 ### Development
 
-The action source is located at [/src](/src). The action is written in TypeScript and compiled to a single javascript file with [`ncc`][ncc]. 
+The action source is located at [/src](/src). The action is written in TypeScript and compiled to a single javascript file with [`ncc`][ncc].
 
 **It's expected to checkin `lib/index.js` to the repository.**
 
