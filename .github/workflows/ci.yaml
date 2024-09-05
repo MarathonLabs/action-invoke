@@ -20,8 +20,32 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      - name: Check if original lib/index.js exists and back it up
+        run: |
+          if [ -f "lib/index.js" ]; then
+            cp lib/index.js lib/index.original.js
+            echo "Original lib/index.js backed up."
+          else
+            echo "Original lib/index.js not found. Failing the job."
+            exit 1  # Fail the job if the original file is not found
+          fi
+
       - name: Build TypeScript
         run: npm run build
+
+      - name: Compare lib/index.js with the original
+        run: |
+          if [ -f "lib/index.original.js" ]; then
+            if diff lib/index.js lib/index.original.js > /dev/null; then
+              echo "No changes detected in lib/index.js."
+            else
+              echo "Changes detected in lib/index.js."
+              exit 1  # Fail the job if differences are found
+            fi
+          else
+            echo "Original lib/index.js backup not found, skipping comparison."
+            exit 1  # Fail if the backup is somehow missing at this point
+          fi
 
       - name: Setup Marathon Cloud
         uses: MarathonLabs/setup-marathon-cloud@2.0.1
@@ -118,6 +142,7 @@ jobs:
           platform: "android"
           name: "android_3_0"
           output: "output"
+          ignoreTestFailures: true
 
       - name: Check if output folder exists and is not empty
         run: |
