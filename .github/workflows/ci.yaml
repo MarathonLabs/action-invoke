@@ -64,6 +64,8 @@ jobs:
           platform: "android"
           name: "android_3_0"
           output: "output"
+          resultFile: "some-result.json"
+          branch: "develop"
 
       - name: Check if output folder exists and is not empty
         run: |

@@ -27,8 +27,9 @@ async function main() {
     const xctestrunTestEnv = core.getInput("xctestrunTestEnv");
     const ignoreTestFailures =
       core.getInput("ignoreTestFailures").toLowerCase() === "true";
-    const resultFile = "result.json";
+    const resultFile = core.getInput("resultFile") || "result.json";
     const pullFiles = core.getInput("pullFiles");
+    const branch = core.getInput("branch");
 
     let args: string[] = [];
 
@@ -56,6 +57,7 @@ async function main() {
           "",
           resultFile,
           pullFiles,
+          branch,
         );
         break;
       }
@@ -81,6 +83,7 @@ async function main() {
           "",
           resultFile,
           pullFiles,
+          branch,
         );
         break;
       }

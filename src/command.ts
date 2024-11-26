@@ -21,6 +21,7 @@ export function buildAndroidArgs(
   ignoreTestFailures: string,
   resultFile: string,
   pullFiles: string,
+  branch: string,
 ): string[] {
   const args = [
     "run",
@@ -100,6 +101,11 @@ export function buildAndroidArgs(
       args.push("--pull-files", env.trim());
     });
   }
+
+  if (branch) {
+    args.push("--branch", branch);
+  }
+
   return args;
 }
 
@@ -124,6 +130,7 @@ export function buildiOSArgs(
   ignoreTestFailures: string,
   resultFile: string,
   pullFiles: string,
+  branch: string,
 ): string[] {
   const args = [
     "run",
@@ -208,6 +215,10 @@ export function buildiOSArgs(
 
   if (pullFiles) {
     core.warning(`pullFiles argument is only for Android`);
+  }
+
+  if (branch) {
+    args.push("--branch", branch);
   }
 
   return args;
