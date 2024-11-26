@@ -29,7 +29,16 @@ jobs:
           application: "example/app.apk"
           testApplication: "example/appTest.apk"
           platform: "android"
-          name: "android_3_0"
+          name: "android_3_0_simple"
+          resultFile: "some-result.json"
+          branch: "develop"
+
+      - name: Upload artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: android_output
+          path: output
 
       - name: Show failure message
         if: failure()
@@ -62,10 +71,8 @@ jobs:
           application: "example/app.apk"
           testApplication: "example/appTest.apk"
           platform: "android"
-          name: "android_3_0"
+          name: "android_3_0_output"
           output: "output"
-          resultFile: "some-result.json"
-          branch: "develop"
 
       - name: Check if output folder exists and is not empty
         run: |
@@ -78,7 +85,7 @@ jobs:
 
       - name: Upload artifact
         if: always()
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: android_output
           path: output
@@ -114,7 +121,7 @@ jobs:
           application: "example/app.apk"
           testApplication: "example/appTestFailed.apk"
           platform: "android"
-          name: "android_3_0"
+          name: "android_3_0_failed"
           output: "output"
           ignoreTestFailures: "true"
 
@@ -129,7 +136,7 @@ jobs:
 
       - name: Upload artifact
         if: always()
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: android_failed_output
           path: output
@@ -179,7 +186,7 @@ jobs:
 
       - name: Upload artifact
         if: always()
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: ios_output
           path: output
