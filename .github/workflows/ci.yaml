@@ -30,15 +30,6 @@ jobs:
           testApplication: "example/appTest.apk"
           platform: "android"
           name: "android_3_0_simple"
-          resultFile: "some-result.json"
-          branch: "develop"
-
-      - name: Upload artifact
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: android_output
-          path: .
 
       - name: Show failure message
         if: failure()
@@ -73,6 +64,8 @@ jobs:
           platform: "android"
           name: "android_3_0_output"
           output: "output"
+          resultFile: "some-result.json"
+          branch: "develop"
 
       - name: Check if output folder exists and is not empty
         run: |
