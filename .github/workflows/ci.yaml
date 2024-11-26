@@ -76,6 +76,13 @@ jobs:
             exit 1
           fi
 
+      - name: Check if resultFile exists
+        run: |
+          if [ ! -f "some-result.json" ]; then
+            echo "Error: some-result.json does not exist."
+            exit 1
+          fi
+
       - name: Upload artifact
         if: always()
         uses: actions/upload-artifact@v4
