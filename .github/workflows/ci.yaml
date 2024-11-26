@@ -83,6 +83,13 @@ jobs:
           name: android_output
           path: output
 
+      - name: Upload resultFile
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: some-result.json
+          path: some-result.json
+
       - name: Show failure message
         if: failure()
         run: |
