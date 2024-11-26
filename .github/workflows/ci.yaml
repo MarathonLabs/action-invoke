@@ -38,7 +38,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: android_output
-          path: output
+          path: .
 
       - name: Show failure message
         if: failure()
