@@ -73,6 +73,9 @@ inputs:
   branch:
     description: "Branch for run, for example it could be git branch like develop or feature/about-screen"
     required: false
+  project:
+    description: "The unique identifier (slug) for the project"
+    required: false
 branding:
   icon: "play"
   color: "purple"

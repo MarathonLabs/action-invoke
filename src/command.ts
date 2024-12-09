@@ -22,6 +22,7 @@ export function buildAndroidArgs(
   resultFile: string,
   pullFiles: string,
   branch: string,
+  project: string,
 ): string[] {
   const args = [
     "run",
@@ -106,6 +107,10 @@ export function buildAndroidArgs(
     args.push("--branch", branch);
   }
 
+  if (project) {
+    args.push("--project", project);
+  }
+
   return args;
 }
 
@@ -131,6 +136,7 @@ export function buildiOSArgs(
   resultFile: string,
   pullFiles: string,
   branch: string,
+  project: string,
 ): string[] {
   const args = [
     "run",
@@ -219,6 +225,10 @@ export function buildiOSArgs(
 
   if (branch) {
     args.push("--branch", branch);
+  }
+
+  if (project) {
+    args.push("--project", project);
   }
 
   return args;
