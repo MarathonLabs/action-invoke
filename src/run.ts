@@ -30,6 +30,7 @@ async function main() {
     const resultFile = core.getInput("resultFile") || "result.json";
     const pullFiles = core.getInput("pullFiles");
     const branch = core.getInput("branch");
+    const project = core.getInput("project");
 
     let args: string[] = [];
 
@@ -58,6 +59,7 @@ async function main() {
           resultFile,
           pullFiles,
           branch,
+          project,
         );
         break;
       }
@@ -84,6 +86,7 @@ async function main() {
           resultFile,
           pullFiles,
           branch,
+          project,
         );
         break;
       }
