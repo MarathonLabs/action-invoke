@@ -23,6 +23,7 @@ export function buildAndroidArgs(
   pullFiles: string,
   branch: string,
   project: string,
+  grantedPermission: string,
 ): string[] {
   const args = [
     "run",
@@ -111,6 +112,10 @@ export function buildAndroidArgs(
     args.push("--project", project);
   }
 
+  if (grantedPermission) {
+    core.warning(`grantedPermission argument is only for iOS`);
+  }
+
   return args;
 }
 
@@ -137,6 +142,7 @@ export function buildiOSArgs(
   pullFiles: string,
   branch: string,
   project: string,
+  grantedPermission: string,
 ): string[] {
   const args = [
     "run",
@@ -229,6 +235,12 @@ export function buildiOSArgs(
 
   if (project) {
     args.push("--project", project);
+  }
+
+  if (grantedPermission) {
+    grantedPermission.split(",").forEach((env) => {
+      args.push("--granted-permission", env.trim());
+    });
   }
 
   return args;

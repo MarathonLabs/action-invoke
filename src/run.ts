@@ -31,6 +31,7 @@ async function main() {
     const pullFiles = core.getInput("pullFiles");
     const branch = core.getInput("branch");
     const project = core.getInput("project");
+    const grantedPermission = core.getInput("grantedPermission");
 
     let args: string[] = [];
 
@@ -60,6 +61,7 @@ async function main() {
           pullFiles,
           branch,
           project,
+          grantedPermission,
         );
         break;
       }
@@ -87,6 +89,7 @@ async function main() {
           pullFiles,
           branch,
           project,
+          grantedPermission,
         );
         break;
       }
