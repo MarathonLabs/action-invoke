@@ -24,6 +24,7 @@ export function buildAndroidArgs(
   branch: string,
   project: string,
   grantedPermission: string,
+  analyticsReadOnly: string,
 ): string[] {
   const args = [
     "run",
@@ -116,6 +117,10 @@ export function buildAndroidArgs(
     core.warning(`grantedPermission argument is only for iOS`);
   }
 
+  if (analyticsReadOnly) {
+    args.push("--analytics-read-only", analyticsReadOnly);
+  }
+
   return args;
 }
 
@@ -143,6 +148,7 @@ export function buildiOSArgs(
   branch: string,
   project: string,
   grantedPermission: string,
+  analyticsReadOnly: string,
 ): string[] {
   const args = [
     "run",
@@ -241,6 +247,10 @@ export function buildiOSArgs(
     grantedPermission.split(",").forEach((env) => {
       args.push("--granted-permission", env.trim());
     });
+  }
+
+  if (analyticsReadOnly) {
+    args.push("--analytics-read-only", analyticsReadOnly);
   }
 
   return args;

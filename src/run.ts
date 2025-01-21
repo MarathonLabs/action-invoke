@@ -32,6 +32,7 @@ async function main() {
     const branch = core.getInput("branch");
     const project = core.getInput("project");
     const grantedPermission = core.getInput("grantedPermission");
+    const analyticsReadOnly = core.getInput("analyticsReadOnly");
 
     let args: string[] = [];
 
@@ -62,6 +63,7 @@ async function main() {
           branch,
           project,
           grantedPermission,
+          analyticsReadOnly,
         );
         break;
       }
@@ -90,6 +92,7 @@ async function main() {
           branch,
           project,
           grantedPermission,
+          analyticsReadOnly,
         );
         break;
       }
