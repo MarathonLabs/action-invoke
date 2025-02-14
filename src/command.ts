@@ -25,6 +25,10 @@ export function buildAndroidArgs(
   project: string,
   grantedPermission: string,
   analyticsReadOnly: string,
+  retryQuotaTestUncompleted: string,
+  retryQuotaTestPreventive: string,
+  retryQuotaTestReactive: string,
+  noRetries: string,
 ): string[] {
   const args = [
     "run",
@@ -121,6 +125,22 @@ export function buildAndroidArgs(
     args.push("--analytics-read-only", analyticsReadOnly);
   }
 
+  if (retryQuotaTestUncompleted) {
+    args.push("--retry-quota-test-uncompleted", retryQuotaTestUncompleted);
+  }
+
+  if (retryQuotaTestPreventive) {
+    args.push("--retry-quota-test-preventive", retryQuotaTestPreventive);
+  }
+
+  if (retryQuotaTestReactive) {
+    args.push("--retry-quota-test-reactive", retryQuotaTestReactive);
+  }
+
+  if (typeof noRetries === "string" && noRetries.toLowerCase() === "true") {
+    args.push("--no-retries");
+  }
+
   return args;
 }
 
@@ -149,6 +169,10 @@ export function buildiOSArgs(
   project: string,
   grantedPermission: string,
   analyticsReadOnly: string,
+  retryQuotaTestUncompleted: string,
+  retryQuotaTestPreventive: string,
+  retryQuotaTestReactive: string,
+  noRetries: string,
 ): string[] {
   const args = [
     "run",
@@ -251,6 +275,22 @@ export function buildiOSArgs(
 
   if (analyticsReadOnly) {
     args.push("--analytics-read-only", analyticsReadOnly);
+  }
+
+  if (retryQuotaTestUncompleted) {
+    args.push("--retry-quota-test-uncompleted", retryQuotaTestUncompleted);
+  }
+
+  if (retryQuotaTestPreventive) {
+    args.push("--retry-quota-test-preventive", retryQuotaTestPreventive);
+  }
+
+  if (retryQuotaTestReactive) {
+    args.push("--retry-quota-test-reactive", retryQuotaTestReactive);
+  }
+
+  if (typeof noRetries === "string" && noRetries.toLowerCase() === "true") {
+    args.push("--no-retries");
   }
 
   return args;

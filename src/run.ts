@@ -33,6 +33,12 @@ async function main() {
     const project = core.getInput("project");
     const grantedPermission = core.getInput("grantedPermission");
     const analyticsReadOnly = core.getInput("analyticsReadOnly");
+    const retryQuotaTestUncompleted = core.getInput(
+      "retryQuotaTestUncompleted",
+    );
+    const retryQuotaTestPreventive = core.getInput("retryQuotaTestPreventive");
+    const retryQuotaTestReactive = core.getInput("retryQuotaTestReactive");
+    const noRetries = core.getInput("noRetries");
 
     let args: string[] = [];
 
@@ -64,6 +70,10 @@ async function main() {
           project,
           grantedPermission,
           analyticsReadOnly,
+          retryQuotaTestUncompleted,
+          retryQuotaTestPreventive,
+          retryQuotaTestReactive,
+          noRetries,
         );
         break;
       }
@@ -93,6 +103,10 @@ async function main() {
           project,
           grantedPermission,
           analyticsReadOnly,
+          retryQuotaTestUncompleted,
+          retryQuotaTestPreventive,
+          retryQuotaTestReactive,
+          noRetries,
         );
         break;
       }

@@ -82,6 +82,18 @@ inputs:
   analyticsReadOnly:
     description: "If true then test run will not affect any statistical measurements [possible values: true, false]"
     required: false
+  retryQuotaTestUncompleted:
+    description: "Number of allowed uncompleted executions per test"
+    required: false
+  retryQuotaTestPreventive:
+    description: "Number of allowed preventive retries per test"
+    required: false
+  retryQuotaTestReactive:
+    description: "Number of allowed reactive retries per test"
+    required: false
+  noRetries:
+    description: "Disable all retries [possible values: true, false]"
+    required: false
 branding:
   icon: "play"
   color: "purple"
