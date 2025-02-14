@@ -30,9 +30,6 @@ jobs:
           testApplication: "example/appTest.apk"
           platform: "android"
           name: "android_3_0_simple"
-          retryQuotaTestUncompleted: 1
-          retryQuotaTestPreventive: 1
-          retryQuotaTestReactive: 1
           noRetries: true
 
       - name: Show failure message
