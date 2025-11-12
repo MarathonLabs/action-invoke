@@ -37,6 +37,10 @@ This action wraps [marathon-cloud][] CLI in your GitHub Actions workflow.
 | `retryQuotaTestPreventive` (optional)  | Number of allowed preventive retries per test                                                                                                                                                                                                                                                                                               | ``                                         | `0`, `1`, `2`, etc.                                                                                                                                                                              |
 |  `retryQuotaTestReactive` (optional)   | Number of allowed reactive retries per test                                                                                                                                                                                                                                                                                                 | ``                                         | `0`, `1`, `2`, etc.                                                                                                                                                                              |
 |         `noRetries` (optional)         | Disable all retries                                                                                                                                                                                                                                                                                                                         | `false`                                    | `true`, `false`                                                                                                                                                                                  |
+|         `maestroEnv` (optional)        | maestro environment variables, format: 'MAESTRO_APP_ID=com.example,MAESTRO_OTHER_VAR=blahblah'                                                                                                                                                                                                                                              | ``                                         | `MAESTRO_APP_ID=com.example,MAESTRO_OTHER_VAR=blahblah`                                                                                                                                          |
+|            `flows` (optional)          | maestro flows to execute, all the files specified should be inside the testApplication folder: 'flows/my-flow.yaml,flows/subfolder/flow.yaml'                                                                                                                                                                                               | ``                                         | `flows/my-flow.yaml,flows/subfolder/flow.yaml`                                                                                                                                                   |
+
+
 
 ## Usage Examples
 
@@ -64,6 +68,70 @@ This action wraps [marathon-cloud][] CLI in your GitHub Actions workflow.
     application: "/home/user/workspace/sample.zip"
     testApplication: "/home/user/workspace/sampleUITests-Runner.zip"
     platform: "ios"
+```
+
+#### Maestro
+##### Android
+
+```yaml
+- name: run tests using marathon-cloud
+  uses: MarathonLabs/action-invoke@1
+  with:
+    apiKey: "cafebabe"
+    application: "/home/user/workspace/sample.apk"
+    testApplication: "/home/user/workspace/root_folder_with_flows"
+    platform: "maestro/android"
+```
+
+##### Maestro iOS 
+
+```yaml
+- name: run tests using marathon-cloud
+  uses: MarathonLabs/action-invoke@1
+  with:
+    apiKey: "cafebabe"
+    application: "/home/user/workspace/sample.zip"
+    testApplication: "/home/user/workspace/root_folder_with_flows"
+    platform: "maestro/ios"
+```
+
+##### Select flows with tag(s)
+Put the following into a file, i.e. `run_filter.yaml`
+```yaml
+filteringConfiguration:
+  allowlist:
+    - type: "annotation"
+      values:
+        - "tag1"
+        - "tag2"
+  blocklist:
+    - type: "annotation"
+      values:
+        - "tag3"
+        - "tag4"
+```
+
+```yaml
+- name: run tests using marathon-cloud
+  uses: MarathonLabs/action-invoke@1
+  with:
+    apiKey: "cafebabe"
+    application: "/home/user/workspace/sample.apk"
+    testApplication: "/home/user/workspace/root_folder_with_flows"
+    platform: "maestro/android"
+    filterFile: /home/user/workspace/run_filter.yaml
+```
+
+##### Run flows by path
+```yaml
+- name: run tests using marathon-cloud
+  uses: MarathonLabs/action-invoke@1
+  with:
+    apiKey: "cafebabe"
+    application: "/home/user/workspace/sample.apk"
+    testApplication: "/home/user/workspace/root_folder_with_flows"
+    platform: "maestro/android"
+    flows: /home/user/workspace/root_folder_with_flows/1.yaml,/home/user/workspace/root_folder_with_flows/2.yaml
 ```
 
 ### Development

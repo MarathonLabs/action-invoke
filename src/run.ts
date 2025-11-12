@@ -1,7 +1,7 @@
 import * as core from "@actions/core";
 import { exec } from "@actions/exec";
 import * as fs from "fs";
-import { buildAndroidArgs, buildiOSArgs, buildDownloadArgs } from "./command";
+import { buildAndroidArgs, buildIosArgs, buildDownloadArgs, buildMaestroAndroidArgs, buildMaestroIosArgs } from "./command";
 
 async function main() {
   try {
@@ -39,6 +39,8 @@ async function main() {
     const retryQuotaTestPreventive = core.getInput("retryQuotaTestPreventive");
     const retryQuotaTestReactive = core.getInput("retryQuotaTestReactive");
     const noRetries = core.getInput("noRetries");
+    const maestroEnv = core.getInput("maestroEnv");
+    const flows = core.getInput("flows");
 
     let args: string[] = [];
 
@@ -78,7 +80,7 @@ async function main() {
         break;
       }
       case "ios": {
-        args = buildiOSArgs(
+        args = buildIosArgs(
           apiKey,
           application,
           testApplication,
@@ -107,6 +109,76 @@ async function main() {
           retryQuotaTestPreventive,
           retryQuotaTestReactive,
           noRetries,
+        );
+        break;
+      }
+      case "maestro/android": {
+        args = buildMaestroAndroidArgs(
+          apiKey,
+          application,
+          testApplication,
+          link,
+          osVersion,
+          systemImage,
+          isolated,
+          flavor,
+          filterFile,
+          wait,
+          name,
+          device,
+          xcodeVersion,
+          xctestplanFilterFile,
+          xctestplanTargetName,
+          xctestrunEnv,
+          xctestrunTestEnv,
+          "",
+          resultFile,
+          pullFiles,
+          branch,
+          project,
+          grantedPermission,
+          analyticsReadOnly,
+          retryQuotaTestUncompleted,
+          retryQuotaTestPreventive,
+          retryQuotaTestReactive,
+          noRetries,
+          maestroEnv,
+          flows,
+        );
+        break;
+      }
+      case "maestro/ios": {
+        args = buildMaestroIosArgs(
+          apiKey,
+          application,
+          testApplication,
+          link,
+          osVersion,
+          systemImage,
+          isolated,
+          flavor,
+          filterFile,
+          wait,
+          name,
+          device,
+          xcodeVersion,
+          xctestplanFilterFile,
+          xctestplanTargetName,
+          xctestrunEnv,
+          xctestrunTestEnv,
+          "",
+          resultFile,
+          pullFiles,
+          branch,
+          project,
+          grantedPermission,
+          analyticsReadOnly,
+          retryQuotaTestUncompleted,
+          retryQuotaTestPreventive,
+          retryQuotaTestReactive,
+          noRetries,
+          maestroEnv,
+          flows,
         );
         break;
       }

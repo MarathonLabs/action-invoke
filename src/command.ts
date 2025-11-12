@@ -1,5 +1,79 @@
 import * as core from "@actions/core";
 
+export function buildMaestroAndroidArgs(
+  apiKey: string,
+  application: string,
+  testApplication: string,
+  link: string,
+  osVersion: string,
+  systemImage: string,
+  isolated: string,
+  flavor: string,
+  filterFile: string,
+  wait: string,
+  name: string,
+  device: string,
+  xcodeVersion: string,
+  xctestplanFilterFile: string,
+  xctestplanTargetName: string,
+  xctestrunEnv: string,
+  xctestrunTestEnv: string,
+  ignoreTestFailures: string,
+  resultFile: string,
+  pullFiles: string,
+  branch: string,
+  project: string,
+  grantedPermission: string,
+  analyticsReadOnly: string,
+  retryQuotaTestUncompleted: string,
+  retryQuotaTestPreventive: string,
+  retryQuotaTestReactive: string,
+  noRetries: string,
+  maestroEnv: string,
+  flows: string,
+): string[] {
+  let args: string[] = ["run", "maestro", "android"];
+  if (maestroEnv) {
+    args.push("--maestro-env", maestroEnv);
+  }
+  args = buildCommonAndroidArgs(
+    args,
+    apiKey,
+    application,
+    testApplication,
+    link,
+    osVersion,
+    systemImage,
+    isolated,
+    flavor,
+    filterFile,
+    wait,
+    name,
+    device,
+    xcodeVersion,
+    xctestplanFilterFile,
+    xctestplanTargetName,
+    xctestrunEnv,
+    xctestrunTestEnv,
+    ignoreTestFailures,
+    resultFile,
+    pullFiles,
+    branch,
+    project,
+    grantedPermission,
+    analyticsReadOnly,
+    retryQuotaTestUncompleted,
+    retryQuotaTestPreventive,
+    retryQuotaTestReactive,
+    noRetries
+  );
+  if (flows) {
+    let flowFiles = flows.split(',');
+    args = args.concat(flowFiles);
+  }
+  return args
+}
+
 export function buildAndroidArgs(
   apiKey: string,
   application: string,
@@ -30,9 +104,72 @@ export function buildAndroidArgs(
   retryQuotaTestReactive: string,
   noRetries: string,
 ): string[] {
-  const args = [
-    "run",
-    "android",
+  const args: string[] = ["run", "maestro", "android"];
+  return buildCommonAndroidArgs(
+    args,
+    apiKey,
+    application,
+    testApplication,
+    link,
+    osVersion,
+    systemImage,
+    isolated,
+    flavor,
+    filterFile,
+    wait,
+    name,
+    device,
+    xcodeVersion,
+    xctestplanFilterFile,
+    xctestplanTargetName,
+    xctestrunEnv,
+    xctestrunTestEnv,
+    ignoreTestFailures,
+    resultFile,
+    pullFiles,
+    branch,
+    project,
+    grantedPermission,
+    analyticsReadOnly,
+    retryQuotaTestUncompleted,
+    retryQuotaTestPreventive,
+    retryQuotaTestReactive,
+    noRetries
+  );
+}
+
+function buildCommonAndroidArgs(
+  args: string[],
+  apiKey: string,
+  application: string,
+  testApplication: string,
+  link: string,
+  osVersion: string,
+  systemImage: string,
+  isolated: string,
+  flavor: string,
+  filterFile: string,
+  wait: string,
+  name: string,
+  device: string,
+  xcodeVersion: string,
+  xctestplanFilterFile: string,
+  xctestplanTargetName: string,
+  xctestrunEnv: string,
+  xctestrunTestEnv: string,
+  ignoreTestFailures: string,
+  resultFile: string,
+  pullFiles: string,
+  branch: string,
+  project: string,
+  grantedPermission: string,
+  analyticsReadOnly: string,
+  retryQuotaTestUncompleted: string,
+  retryQuotaTestPreventive: string,
+  retryQuotaTestReactive: string,
+  noRetries: string,
+): string[] {
+  args.push(
     "--api-key",
     apiKey,
     "--application",
@@ -41,7 +178,7 @@ export function buildAndroidArgs(
     testApplication,
     "--result-file",
     resultFile,
-  ];
+  );
 
   if (link) {
     args.push("--link", link);
@@ -144,7 +281,79 @@ export function buildAndroidArgs(
   return args;
 }
 
-export function buildiOSArgs(
+export function buildMaestroIosArgs(
+  apiKey: string,
+  application: string,
+  testApplication: string,
+  link: string,
+  osVersion: string,
+  systemImage: string,
+  isolated: string,
+  flavor: string,
+  filterFile: string,
+  wait: string,
+  name: string,
+  device: string,
+  xcodeVersion: string,
+  xctestplanFilterFile: string,
+  xctestplanTargetName: string,
+  xctestrunEnv: string,
+  xctestrunTestEnv: string,
+  ignoreTestFailures: string,
+  resultFile: string,
+  pullFiles: string,
+  branch: string,
+  project: string,
+  grantedPermission: string,
+  analyticsReadOnly: string,
+  retryQuotaTestUncompleted: string,
+  retryQuotaTestPreventive: string,
+  retryQuotaTestReactive: string,
+  noRetries: string,
+  maestroEnv: string,
+  flows: string,
+): string[] {
+  let args: string[] = ["run", "maestro", "ios"];
+  if (maestroEnv) {
+    args.push("--maestro-env", maestroEnv);
+  }
+  args = buildCommoniOSArgs(args,
+    apiKey,
+    application,
+    testApplication,
+    link,
+    osVersion,
+    systemImage,
+    isolated,
+    flavor,
+    filterFile,
+    wait,
+    name,
+    device,
+    xcodeVersion,
+    xctestplanFilterFile,
+    xctestplanTargetName,
+    xctestrunEnv,
+    xctestrunTestEnv,
+    ignoreTestFailures,
+    resultFile,
+    pullFiles,
+    branch,
+    project,
+    grantedPermission,
+    analyticsReadOnly,
+    retryQuotaTestUncompleted,
+    retryQuotaTestPreventive,
+    retryQuotaTestReactive,
+    noRetries);
+  if (flows) {
+    let flowFiles = flows.split(',');
+    args = args.concat(flowFiles);
+  }
+  return args
+}
+
+export function buildIosArgs(
   apiKey: string,
   application: string,
   testApplication: string,
@@ -174,9 +383,70 @@ export function buildiOSArgs(
   retryQuotaTestReactive: string,
   noRetries: string,
 ): string[] {
-  const args = [
-    "run",
-    "ios",
+  const args: string[] = ["run", "ios"];
+  return buildCommoniOSArgs(args,
+    apiKey,
+    application,
+    testApplication,
+    link,
+    osVersion,
+    systemImage,
+    isolated,
+    flavor,
+    filterFile,
+    wait,
+    name,
+    device,
+    xcodeVersion,
+    xctestplanFilterFile,
+    xctestplanTargetName,
+    xctestrunEnv,
+    xctestrunTestEnv,
+    ignoreTestFailures,
+    resultFile,
+    pullFiles,
+    branch,
+    project,
+    grantedPermission,
+    analyticsReadOnly,
+    retryQuotaTestUncompleted,
+    retryQuotaTestPreventive,
+    retryQuotaTestReactive,
+    noRetries)
+}
+
+export function buildCommoniOSArgs(
+  args: string[],
+  apiKey: string,
+  application: string,
+  testApplication: string,
+  link: string,
+  osVersion: string,
+  systemImage: string,
+  isolated: string,
+  flavor: string,
+  filterFile: string,
+  wait: string,
+  name: string,
+  device: string,
+  xcodeVersion: string,
+  xctestplanFilterFile: string,
+  xctestplanTargetName: string,
+  xctestrunEnv: string,
+  xctestrunTestEnv: string,
+  ignoreTestFailures: string,
+  resultFile: string,
+  pullFiles: string,
+  branch: string,
+  project: string,
+  grantedPermission: string,
+  analyticsReadOnly: string,
+  retryQuotaTestUncompleted: string,
+  retryQuotaTestPreventive: string,
+  retryQuotaTestReactive: string,
+  noRetries: string,
+): string[] {
+  args.push(
     "--api-key",
     apiKey,
     "--application",
@@ -185,7 +455,7 @@ export function buildiOSArgs(
     testApplication,
     "--result-file",
     resultFile,
-  ];
+  );
 
   if (link) {
     args.push("--link", link);
