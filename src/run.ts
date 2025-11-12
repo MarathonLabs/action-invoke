@@ -1,7 +1,13 @@
 import * as core from "@actions/core";
 import { exec } from "@actions/exec";
 import * as fs from "fs";
-import { buildAndroidArgs, buildIosArgs, buildDownloadArgs, buildMaestroAndroidArgs, buildMaestroIosArgs } from "./command";
+import {
+  buildAndroidArgs,
+  buildIosArgs,
+  buildDownloadArgs,
+  buildMaestroAndroidArgs,
+  buildMaestroIosArgs,
+} from "./command";
 
 async function main() {
   try {

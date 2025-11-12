@@ -65,13 +65,13 @@ export function buildMaestroAndroidArgs(
     retryQuotaTestUncompleted,
     retryQuotaTestPreventive,
     retryQuotaTestReactive,
-    noRetries
+    noRetries,
   );
   if (flows) {
-    let flowFiles = flows.split(',');
+    let flowFiles = flows.split(",");
     args = args.concat(flowFiles);
   }
-  return args
+  return args;
 }
 
 export function buildAndroidArgs(
@@ -134,7 +134,7 @@ export function buildAndroidArgs(
     retryQuotaTestUncompleted,
     retryQuotaTestPreventive,
     retryQuotaTestReactive,
-    noRetries
+    noRetries,
   );
 }
 
@@ -317,7 +317,8 @@ export function buildMaestroIosArgs(
   if (maestroEnv) {
     args.push("--maestro-env", maestroEnv);
   }
-  args = buildCommoniOSArgs(args,
+  args = buildCommoniOSArgs(
+    args,
     apiKey,
     application,
     testApplication,
@@ -345,12 +346,13 @@ export function buildMaestroIosArgs(
     retryQuotaTestUncompleted,
     retryQuotaTestPreventive,
     retryQuotaTestReactive,
-    noRetries);
+    noRetries,
+  );
   if (flows) {
-    let flowFiles = flows.split(',');
+    let flowFiles = flows.split(",");
     args = args.concat(flowFiles);
   }
-  return args
+  return args;
 }
 
 export function buildIosArgs(
@@ -384,7 +386,8 @@ export function buildIosArgs(
   noRetries: string,
 ): string[] {
   const args: string[] = ["run", "ios"];
-  return buildCommoniOSArgs(args,
+  return buildCommoniOSArgs(
+    args,
     apiKey,
     application,
     testApplication,
@@ -412,7 +415,8 @@ export function buildIosArgs(
     retryQuotaTestUncompleted,
     retryQuotaTestPreventive,
     retryQuotaTestReactive,
-    noRetries)
+    noRetries,
+  );
 }
 
 export function buildCommoniOSArgs(
