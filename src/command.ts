@@ -104,7 +104,7 @@ export function buildAndroidArgs(
   retryQuotaTestReactive: string,
   noRetries: string,
 ): string[] {
-  const args: string[] = ["run", "maestro", "android"];
+  const args: string[] = ["run", "android"];
   return buildCommonAndroidArgs(
     args,
     apiKey,
