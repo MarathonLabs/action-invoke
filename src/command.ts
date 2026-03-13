@@ -34,8 +34,11 @@ export function buildMaestroAndroidArgs(
 ): string[] {
   let args: string[] = ["run", "maestro", "android"];
   if (maestroEnv) {
-    args.push("--maestro-env", maestroEnv);
+    maestroEnv.split(",").forEach((env) => {
+      args.push("--maestro-env", env.trim());
+    });
   }
+
   args = buildCommonAndroidArgs(
     args,
     apiKey,
@@ -315,8 +318,11 @@ export function buildMaestroIosArgs(
 ): string[] {
   let args: string[] = ["run", "maestro", "ios"];
   if (maestroEnv) {
-    args.push("--maestro-env", maestroEnv);
+    maestroEnv.split(",").forEach((env) => {
+      args.push("--maestro-env", env.trim());
+    });
   }
+
   args = buildCommoniOSArgs(
     args,
     apiKey,
