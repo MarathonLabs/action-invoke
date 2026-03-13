@@ -182,6 +182,8 @@ jobs:
           testApplication: "example/sampleUITests-Runner.zip"
           platform: "ios"
           name: "ios_3_0"
+          osVersion: "26.1"
+          device: "iPhone-17"
           output: "output"
 
       - name: Check if output folder exists and is not empty
@@ -228,8 +230,6 @@ jobs:
           testApplication: "example/maestro/android/flows"
           platform: "maestro/android"
           name: "maestro_android_simple"
-          osVersion: "26.1"
-          device: "iPhone-17"
           maestroEnv: "MAESTRO_ONE=one,MAESTRO_TWO=two"
       - name: Show failure message
         if: failure()
