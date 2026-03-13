@@ -228,6 +228,8 @@ jobs:
           testApplication: "example/maestro/android/flows"
           platform: "maestro/android"
           name: "maestro_android_simple"
+          osVersion: "26.1"
+          device: "iPhone-17"
           maestroEnv: "MAESTRO_ONE=one,MAESTRO_TWO=two"
       - name: Show failure message
         if: failure()
@@ -257,6 +259,8 @@ jobs:
           testApplication: "example/maestro/ios/flows"
           platform: "maestro/ios"
           name: "maestro_ios_simple"
+          osVersion: "26.1"
+          device: "iPhone-17"
           maestroEnv: "MAESTRO_ONE=one,MAESTRO_TWO=two"
       - name: Show failure message
         if: failure()
