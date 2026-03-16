@@ -218,6 +218,9 @@ async function main() {
 
     // Check if output is empty and skip the remaining part if it is
     if (!output) {
+      if (errorMessage && !ignoreTestFailures) {
+        setFailed(errorMessage);
+      }
       return;
     }
 
