@@ -71,7 +71,7 @@ export function buildMaestroAndroidArgs(
     noRetries,
   );
   if (flows) {
-    let flowFiles = flows.split(",");
+    const flowFiles = flows.split(",");
     args = args.concat(flowFiles);
   }
   return args;
@@ -355,7 +355,7 @@ export function buildMaestroIosArgs(
     noRetries,
   );
   if (flows) {
-    let flowFiles = flows.split(",");
+    const flowFiles = flows.split(",");
     args = args.concat(flowFiles);
   }
   return args;

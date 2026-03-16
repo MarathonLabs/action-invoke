@@ -7,7 +7,6 @@ on:
 env:
   MARATHON_CLOUD_CLI_VERSION: "1.0.58"
   NODE_VERSION: "24"
-  SETUP_MARATHON_CLOUD_VERSION: "2.0.1"
 
 jobs:
   check_simple_android:
@@ -23,7 +22,7 @@ jobs:
           node-version: ${{ env.NODE_VERSION}}
 
       - name: Setup Marathon Cloud
-        uses: MarathonLabs/setup-marathon-cloud@${{ env.SETUP_MARATHON_CLOUD_VERSION }}
+        uses: MarathonLabs/setup-marathon-cloud@2.0.2
         with:
           version: ${{ env.MARATHON_CLOUD_CLI_VERSION }}
       - name: Run Marathon Cloud action-invoke
@@ -55,7 +54,7 @@ jobs:
           node-version: ${{ env.NODE_VERSION}}
 
       - name: Setup Marathon Cloud
-        uses: MarathonLabs/setup-marathon-cloud@${{ env.SETUP_MARATHON_CLOUD_VERSION }}
+        uses: MarathonLabs/setup-marathon-cloud@2.0.2
         with:
           version: ${{ env.MARATHON_CLOUD_CLI_VERSION }}
 
@@ -121,7 +120,7 @@ jobs:
           node-version: ${{ env.NODE_VERSION}}
 
       - name: Setup Marathon Cloud
-        uses: MarathonLabs/setup-marathon-cloud@${{ env.SETUP_MARATHON_CLOUD_VERSION }}
+        uses: MarathonLabs/setup-marathon-cloud@2.0.2
         with:
           version: ${{ env.MARATHON_CLOUD_CLI_VERSION }}
 
@@ -172,7 +171,7 @@ jobs:
           node-version: ${{ env.NODE_VERSION}}
 
       - name: Setup Marathon Cloud
-        uses: MarathonLabs/setup-marathon-cloud@${{ env.SETUP_MARATHON_CLOUD_VERSION }}
+        uses: MarathonLabs/setup-marathon-cloud@2.0.2
         with:
           version: ${{ env.MARATHON_CLOUD_CLI_VERSION }}
 
@@ -221,7 +220,7 @@ jobs:
         with:
           node-version: ${{ env.NODE_VERSION}}
       - name: Setup Marathon Cloud
-        uses: MarathonLabs/setup-marathon-cloud@${{ env.SETUP_MARATHON_CLOUD_VERSION }}
+        uses: MarathonLabs/setup-marathon-cloud@2.0.2
         with:
           version: ${{ env.MARATHON_CLOUD_CLI_VERSION }}
       - name: Run Marathon Cloud action-invoke
@@ -250,7 +249,7 @@ jobs:
         with:
           node-version: ${{ env.NODE_VERSION}}
       - name: Setup Marathon Cloud
-        uses: MarathonLabs/setup-marathon-cloud@${{ env.SETUP_MARATHON_CLOUD_VERSION }}
+        uses: MarathonLabs/setup-marathon-cloud@2.0.2
         with:
           version: ${{ env.MARATHON_CLOUD_CLI_VERSION }}
       - name: Run Marathon Cloud action-invoke

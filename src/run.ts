@@ -200,6 +200,7 @@ async function main() {
 
     try {
       exitCode = await exec("marathon-cloud", args);
+      /* eslint-disable @typescript-eslint/no-explicit-any */
     } catch (error: any) {
       exitCode = error?.code ?? 1; // Default to 1 if there's no specific exit code
       errorMessage =
@@ -236,7 +237,7 @@ async function main() {
     const result = JSON.parse(resultJson);
     const runId = result.id;
 
-    let downloadArgs: string[] = buildDownloadArgs(
+    const downloadArgs: string[] = buildDownloadArgs(
       apiKey,
       runId,
       output,
@@ -248,6 +249,7 @@ async function main() {
     if (errorMessage && !ignoreTestFailures) {
       setFailed(errorMessage);
     }
+    /* eslint-disable @typescript-eslint/no-explicit-any */
   } catch (e: any) {
     warning(`marathon-cloud invoke failed: ${e}`);
     setFailed(e);
