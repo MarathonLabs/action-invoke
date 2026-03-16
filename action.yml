@@ -104,5 +104,5 @@ branding:
   icon: "play"
   color: "purple"
 runs:
-  using: "node20"
+  using: "node24"
   main: "lib/index.js"
