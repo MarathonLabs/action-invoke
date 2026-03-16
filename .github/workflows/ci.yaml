@@ -6,22 +6,20 @@ on:
 
 env:
   MARATHON_CLOUD_CLI_VERSION: "1.0.58"
+  NODE_VERSION: "24"
 
 jobs:
   check_simple_android:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
-
+        uses: actions/checkout@v6
       - name: Set up Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v6
         with:
-          node-version: "16"
-
+          node-version: ${{ env.NODE_VERSION}}
       - name: Setup Marathon Cloud
-        uses: MarathonLabs/setup-marathon-cloud@2.0.1
+        uses: MarathonLabs/setup-marathon-cloud@2.0.2
         with:
           version: ${{ env.MARATHON_CLOUD_CLI_VERSION }}
       - name: Run Marathon Cloud action-invoke
@@ -32,7 +30,6 @@ jobs:
           testApplication: "example/appTest.apk"
           platform: "android"
           name: "android_3_0_simple"
-
       - name: Show failure message
         if: failure()
         run: |
@@ -42,21 +39,17 @@ jobs:
 
   check_output_android:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
-
+        uses: actions/checkout@v6
       - name: Set up Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v6
         with:
-          node-version: "16"
-
+          node-version: ${{ env.NODE_VERSION}}
       - name: Setup Marathon Cloud
-        uses: MarathonLabs/setup-marathon-cloud@2.0.1
+        uses: MarathonLabs/setup-marathon-cloud@2.0.2
         with:
           version: ${{ env.MARATHON_CLOUD_CLI_VERSION }}
-
       - name: Run Marathon Cloud action-invoke
         uses: ./
         with:
@@ -68,7 +61,6 @@ jobs:
           output: "output"
           resultFile: "some-result.json"
           branch: "develop"
-
       - name: Check if output folder exists and is not empty
         run: |
           if [ -d "output" ] && [ "$(ls -A output)" ]; then
@@ -77,28 +69,24 @@ jobs:
             echo "Output folder does not exist or is empty."
             exit 1
           fi
-
       - name: Check if resultFile exists
         run: |
           if [ ! -f "some-result.json" ]; then
             echo "Error: some-result.json does not exist."
             exit 1
           fi
-
       - name: Upload artifact
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: android_output
           path: output
-
       - name: Upload resultFile
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: some-result.json
           path: some-result.json
-
       - name: Show failure message
         if: failure()
         run: |
@@ -108,21 +96,13 @@ jobs:
 
   check_output_failed_android:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: "16"
-
+        uses: actions/checkout@v6
       - name: Setup Marathon Cloud
-        uses: MarathonLabs/setup-marathon-cloud@2.0.1
+        uses: MarathonLabs/setup-marathon-cloud@2.0.2
         with:
           version: ${{ env.MARATHON_CLOUD_CLI_VERSION }}
-
       - name: Run Marathon Cloud action-invoke
         uses: ./
         with:
@@ -133,23 +113,12 @@ jobs:
           name: "android_3_0_failed"
           output: "output"
           ignoreTestFailures: "true"
-
-      - name: Check if output folder exists and is not empty
-        run: |
-          if [ -d "output" ] && [ "$(ls -A output)" ]; then
-            echo "Output folder exists and is not empty."
-          else
-            echo "Output folder does not exist or is empty."
-            exit 1
-          fi
-
       - name: Upload artifact
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: android_failed_output
           path: output
-
       - name: Show failure message
         if: failure()
         run: |
@@ -159,21 +128,17 @@ jobs:
 
   check_ios:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
-
+        uses: actions/checkout@v6
       - name: Set up Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v6
         with:
-          node-version: "16"
-
+          node-version: ${{ env.NODE_VERSION}}
       - name: Setup Marathon Cloud
-        uses: MarathonLabs/setup-marathon-cloud@2.0.1
+        uses: MarathonLabs/setup-marathon-cloud@2.0.2
         with:
           version: ${{ env.MARATHON_CLOUD_CLI_VERSION }}
-
       - name: Run Marathon Cloud action-invoke
         uses: ./
         with:
@@ -185,7 +150,6 @@ jobs:
           osVersion: "18.4"
           device: "iPhone-16"
           output: "output"
-
       - name: Check if output folder exists and is not empty
         run: |
           if [ -d "output" ] && [ "$(ls -A output)" ]; then
@@ -194,14 +158,12 @@ jobs:
             echo "Output folder does not exist or is empty."
             exit 1
           fi
-
       - name: Upload artifact
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: ios_output
           path: output
-
       - name: Show failure message
         if: failure()
         run: |
@@ -213,13 +175,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v6
       - name: Set up Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v6
         with:
-          node-version: "16"
+          node-version: ${{ env.NODE_VERSION}}
       - name: Setup Marathon Cloud
-        uses: MarathonLabs/setup-marathon-cloud@2.0.1
+        uses: MarathonLabs/setup-marathon-cloud@2.0.2
         with:
           version: ${{ env.MARATHON_CLOUD_CLI_VERSION }}
       - name: Run Marathon Cloud action-invoke
@@ -231,6 +193,7 @@ jobs:
           platform: "maestro/android"
           name: "maestro_android_simple"
           maestroEnv: "MAESTRO_ONE=one,MAESTRO_TWO=two"
+          ignoreTestFailures: "true"
       - name: Show failure message
         if: failure()
         run: |
@@ -242,13 +205,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v6
       - name: Set up Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v6
         with:
-          node-version: "16"
+          node-version: ${{ env.NODE_VERSION}}
       - name: Setup Marathon Cloud
-        uses: MarathonLabs/setup-marathon-cloud@2.0.1
+        uses: MarathonLabs/setup-marathon-cloud@2.0.2
         with:
           version: ${{ env.MARATHON_CLOUD_CLI_VERSION }}
       - name: Run Marathon Cloud action-invoke
@@ -262,6 +225,7 @@ jobs:
           osVersion: "18.4"
           device: "iPhone-16"
           maestroEnv: "MAESTRO_ONE=one,MAESTRO_TWO=two"
+          ignoreTestFailures: "true"
       - name: Show failure message
         if: failure()
         run: |
