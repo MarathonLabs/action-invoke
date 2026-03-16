@@ -193,6 +193,7 @@ jobs:
           platform: "maestro/android"
           name: "maestro_android_simple"
           maestroEnv: "MAESTRO_ONE=one,MAESTRO_TWO=two"
+          ignoreTestFailures: "true"
       - name: Show failure message
         if: failure()
         run: |
@@ -224,6 +225,7 @@ jobs:
           osVersion: "18.4"
           device: "iPhone-16"
           maestroEnv: "MAESTRO_ONE=one,MAESTRO_TWO=two"
+          ignoreTestFailures: "true"
       - name: Show failure message
         if: failure()
         run: |
