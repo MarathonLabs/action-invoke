@@ -1,4 +1,4 @@
-import * as core from "@actions/core";
+import { getInput, info, setFailed, warning } from "@actions/core";
 import { exec } from "@actions/exec";
 import * as fs from "fs";
 import {
@@ -11,42 +11,40 @@ import {
 
 async function main() {
   try {
-    const apiKey = core.getInput("apiKey");
-    const application = core.getInput("application");
-    const testApplication = core.getInput("testApplication");
-    const platform = core.getInput("platform");
-    const link = core.getInput("link");
-    const output = core.getInput("output");
-    const outputGlob = core.getInput("outputGlob");
-    const osVersion = core.getInput("osVersion");
-    const systemImage = core.getInput("systemImage");
-    const isolated = core.getInput("isolated");
-    const flavor = core.getInput("flavor");
-    const filterFile = core.getInput("filterFile");
-    const wait = core.getInput("wait");
-    const name = core.getInput("name");
-    const device = core.getInput("device");
-    const xcodeVersion = core.getInput("xcodeVersion");
-    const xctestplanFilterFile = core.getInput("xctestplanFilterFile");
-    const xctestplanTargetName = core.getInput("xctestplanTargetName");
-    const xctestrunEnv = core.getInput("xctestrunEnv");
-    const xctestrunTestEnv = core.getInput("xctestrunTestEnv");
+    const apiKey = getInput("apiKey");
+    const application = getInput("application");
+    const testApplication = getInput("testApplication");
+    const platform = getInput("platform");
+    const link = getInput("link");
+    const output = getInput("output");
+    const outputGlob = getInput("outputGlob");
+    const osVersion = getInput("osVersion");
+    const systemImage = getInput("systemImage");
+    const isolated = getInput("isolated");
+    const flavor = getInput("flavor");
+    const filterFile = getInput("filterFile");
+    const wait = getInput("wait");
+    const name = getInput("name");
+    const device = getInput("device");
+    const xcodeVersion = getInput("xcodeVersion");
+    const xctestplanFilterFile = getInput("xctestplanFilterFile");
+    const xctestplanTargetName = getInput("xctestplanTargetName");
+    const xctestrunEnv = getInput("xctestrunEnv");
+    const xctestrunTestEnv = getInput("xctestrunTestEnv");
     const ignoreTestFailures =
-      core.getInput("ignoreTestFailures").toLowerCase() === "true";
-    const resultFile = core.getInput("resultFile") || "result.json";
-    const pullFiles = core.getInput("pullFiles");
-    const branch = core.getInput("branch");
-    const project = core.getInput("project");
-    const grantedPermission = core.getInput("grantedPermission");
-    const analyticsReadOnly = core.getInput("analyticsReadOnly");
-    const retryQuotaTestUncompleted = core.getInput(
-      "retryQuotaTestUncompleted",
-    );
-    const retryQuotaTestPreventive = core.getInput("retryQuotaTestPreventive");
-    const retryQuotaTestReactive = core.getInput("retryQuotaTestReactive");
-    const noRetries = core.getInput("noRetries");
-    const maestroEnv = core.getInput("maestroEnv");
-    const flows = core.getInput("flows");
+      getInput("ignoreTestFailures").toLowerCase() === "true";
+    const resultFile = getInput("resultFile") || "result.json";
+    const pullFiles = getInput("pullFiles");
+    const branch = getInput("branch");
+    const project = getInput("project");
+    const grantedPermission = getInput("grantedPermission");
+    const analyticsReadOnly = getInput("analyticsReadOnly");
+    const retryQuotaTestUncompleted = getInput("retryQuotaTestUncompleted");
+    const retryQuotaTestPreventive = getInput("retryQuotaTestPreventive");
+    const retryQuotaTestReactive = getInput("retryQuotaTestReactive");
+    const noRetries = getInput("noRetries");
+    const maestroEnv = getInput("maestroEnv");
+    const flows = getInput("flows");
 
     let args: string[] = [];
 
@@ -189,14 +187,14 @@ async function main() {
         break;
       }
       default: {
-        core.setFailed(
+        setFailed(
           `Unsupported platform ${platform}. Please use one of [android, ios]`,
         );
         break;
       }
     }
 
-    core.info("marathon-cloud run command starts...");
+    info("marathon-cloud run command starts...");
     let exitCode = 0;
     let errorMessage: string | null = null;
 
@@ -210,11 +208,9 @@ async function main() {
 
     if (exitCode !== 0) {
       if (!ignoreTestFailures) {
-        core.warning(
-          "Test failures detected, but continuing to download files...",
-        );
+        warning("Test failures detected, but continuing to download files...");
       } else {
-        core.warning(
+        warning(
           "Test failures detected, but continuing as ignoreTestFailures is set to true.",
         );
       }
@@ -226,7 +222,7 @@ async function main() {
     }
 
     if (wait && wait.toLowerCase() === "false") {
-      core.warning(
+      warning(
         "There is no way to download artifacts because wait=false. Please set wait=true to wait for the run to finish and allow artifact download.",
       );
       return;
@@ -243,20 +239,20 @@ async function main() {
       output,
       outputGlob,
     );
-    core.info("marathon-cloud download command starts...");
+    info("marathon-cloud download command starts...");
     await exec("marathon-cloud", downloadArgs);
 
     if (errorMessage && !ignoreTestFailures) {
-      core.setFailed(errorMessage);
+      setFailed(errorMessage);
     }
   } catch (e: any) {
-    core.warning(`marathon-cloud invoke failed: ${e}`);
-    core.setFailed(e);
+    warning(`marathon-cloud invoke failed: ${e}`);
+    setFailed(e);
   }
 }
 
 try {
   main();
 } catch (e) {
-  core.setFailed((e as { message: string }).message);
+  setFailed((e as { message: string }).message);
 }

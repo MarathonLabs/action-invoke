@@ -1,4 +1,4 @@
-import * as core from "@actions/core";
+import { warning } from "@actions/core";
 
 export function buildMaestroAndroidArgs(
   apiKey: string,
@@ -224,23 +224,23 @@ function buildCommonAndroidArgs(
   }
 
   if (xcodeVersion) {
-    core.warning(`xcodeVersion argument is only for iOS`);
+    warning(`xcodeVersion argument is only for iOS`);
   }
 
   if (xctestplanFilterFile) {
-    core.warning(`xctestplanFilterFile argument is only for iOS`);
+    warning(`xctestplanFilterFile argument is only for iOS`);
   }
 
   if (xctestplanTargetName) {
-    core.warning(`xctestplanTargetName argument is only for iOS`);
+    warning(`xctestplanTargetName argument is only for iOS`);
   }
 
   if (xctestrunEnv) {
-    core.warning(`xctestrunEnv argument is only for iOS`);
+    warning(`xctestrunEnv argument is only for iOS`);
   }
 
   if (xctestrunTestEnv) {
-    core.warning(`xctestrunTestEnv argument is only for iOS`);
+    warning(`xctestrunTestEnv argument is only for iOS`);
   }
 
   if (pullFiles) {
@@ -258,7 +258,7 @@ function buildCommonAndroidArgs(
   }
 
   if (grantedPermission) {
-    core.warning(`grantedPermission argument is only for iOS`);
+    warning(`grantedPermission argument is only for iOS`);
   }
 
   if (analyticsReadOnly) {
@@ -476,7 +476,7 @@ export function buildCommoniOSArgs(
   }
 
   if (systemImage) {
-    core.warning(
+    warning(
       `Current version of action-invoke does not yet support system image selection for iOS. Using default`,
     );
   }
@@ -486,7 +486,7 @@ export function buildCommoniOSArgs(
   }
 
   if (flavor) {
-    core.warning(
+    warning(
       `Current version of action-invoke does not yet support flavor selection for iOS. Using default`,
     );
   }
@@ -536,7 +536,7 @@ export function buildCommoniOSArgs(
   }
 
   if (pullFiles) {
-    core.warning(`pullFiles argument is only for Android`);
+    warning(`pullFiles argument is only for Android`);
   }
 
   if (branch) {
