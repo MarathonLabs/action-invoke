@@ -6,7 +6,7 @@
   "type": "module",
   "main": "lib/index.js",
   "scripts": {
-    "build": "ncc build src/run.ts -o lib",
+    "build": "npm run format && ncc build src/run.ts -o lib",
     "local:run": "npm run build && node lib/index.js",
     "test": "jest",
     "test-coverage": "jest --coverage",
