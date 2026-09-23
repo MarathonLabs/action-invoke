@@ -100,6 +100,9 @@ inputs:
   flows:
     description: "maestro flows to execute, all the files specified should be inside the testApplication folder: 'flows/my-flow.yaml,flows/subfolder/flow.yaml'"
     required: false
+  arch:
+    description: "Target architecture: amd64 or arm64"
+    required: false
 branding:
   icon: "play"
   color: "purple"

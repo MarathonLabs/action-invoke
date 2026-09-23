@@ -29,6 +29,7 @@ export function buildMaestroAndroidArgs(
   retryQuotaTestPreventive: string,
   retryQuotaTestReactive: string,
   noRetries: string,
+  arch: string,
   maestroEnv: string,
   flows: string,
 ): string[] {
@@ -69,6 +70,7 @@ export function buildMaestroAndroidArgs(
     retryQuotaTestPreventive,
     retryQuotaTestReactive,
     noRetries,
+    arch,
   );
   if (flows) {
     const flowFiles = flows.split(",");
@@ -106,6 +108,7 @@ export function buildAndroidArgs(
   retryQuotaTestPreventive: string,
   retryQuotaTestReactive: string,
   noRetries: string,
+  arch: string,
 ): string[] {
   const args: string[] = ["run", "android"];
   return buildCommonAndroidArgs(
@@ -138,6 +141,7 @@ export function buildAndroidArgs(
     retryQuotaTestPreventive,
     retryQuotaTestReactive,
     noRetries,
+    arch,
   );
 }
 
@@ -171,6 +175,7 @@ function buildCommonAndroidArgs(
   retryQuotaTestPreventive: string,
   retryQuotaTestReactive: string,
   noRetries: string,
+  arch: string,
 ): string[] {
   args.push(
     "--api-key",
@@ -193,6 +198,10 @@ function buildCommonAndroidArgs(
 
   if (systemImage) {
     args.push("--system-image", systemImage);
+  }
+
+  if (arch) {
+    args.push("--arch", arch);
   }
 
   if (isolated) {
@@ -313,6 +322,7 @@ export function buildMaestroIosArgs(
   retryQuotaTestPreventive: string,
   retryQuotaTestReactive: string,
   noRetries: string,
+  arch: string,
   maestroEnv: string,
   flows: string,
 ): string[] {
@@ -353,6 +363,7 @@ export function buildMaestroIosArgs(
     retryQuotaTestPreventive,
     retryQuotaTestReactive,
     noRetries,
+    arch,
   );
   if (flows) {
     const flowFiles = flows.split(",");
@@ -390,6 +401,7 @@ export function buildIosArgs(
   retryQuotaTestPreventive: string,
   retryQuotaTestReactive: string,
   noRetries: string,
+  arch: string,
 ): string[] {
   const args: string[] = ["run", "ios"];
   return buildCommoniOSArgs(
@@ -422,6 +434,7 @@ export function buildIosArgs(
     retryQuotaTestPreventive,
     retryQuotaTestReactive,
     noRetries,
+    arch,
   );
 }
 
@@ -455,6 +468,7 @@ export function buildCommoniOSArgs(
   retryQuotaTestPreventive: string,
   retryQuotaTestReactive: string,
   noRetries: string,
+  arch: string,
 ): string[] {
   args.push(
     "--api-key",
@@ -479,6 +493,10 @@ export function buildCommoniOSArgs(
     warning(
       `Current version of action-invoke does not yet support system image selection for iOS. Using default`,
     );
+  }
+
+  if (arch) {
+    warning(`arch argument is only for Android`);
   }
 
   if (isolated) {

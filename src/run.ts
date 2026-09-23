@@ -45,6 +45,7 @@ async function main() {
     const noRetries = getInput("noRetries");
     const maestroEnv = getInput("maestroEnv");
     const flows = getInput("flows");
+    const arch = getInput("arch");
 
     let args: string[] = [];
 
@@ -80,6 +81,7 @@ async function main() {
           retryQuotaTestPreventive,
           retryQuotaTestReactive,
           noRetries,
+          arch,
         );
         break;
       }
@@ -113,6 +115,7 @@ async function main() {
           retryQuotaTestPreventive,
           retryQuotaTestReactive,
           noRetries,
+          arch,
         );
         break;
       }
@@ -146,6 +149,7 @@ async function main() {
           retryQuotaTestPreventive,
           retryQuotaTestReactive,
           noRetries,
+          arch,
           maestroEnv,
           flows,
         );
@@ -181,6 +185,7 @@ async function main() {
           retryQuotaTestPreventive,
           retryQuotaTestReactive,
           noRetries,
+          arch,
           maestroEnv,
           flows,
         );
